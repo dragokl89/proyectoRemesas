@@ -1,0 +1,163 @@
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:ui="http://java.sun.com/jsf/facelets">
+
+
+    <h:head>
+        <ui:include src="scripts.xhtml"></ui:include>
+
+        <style>
+            body .ui-panelgrid .ui-panelgrid-cell {
+                background-color: white
+            }
+        </style>
+    </h:head>
+
+    <h:body style="background-color: black">
+        <div class="ui-fluid">
+            <h:form id="formCamiones">
+
+                <p:growl id="messages" showSummary="true" showDetail="true"
+                         skipDetailIfEqualsSummary="true"></p:growl>
+
+                <ui:include src="navbar.xhtml"></ui:include>
+
+                <div class="p-grid sample-layout">
+
+                    <ui:include src="header.xhtml"></ui:include>
+
+                    <div class="p-col-12 p-md-10 p-col-nogutter"
+                         style="background-color: black">
+                        <div class="p-grid">
+
+                            <div class="p-col-10" style="margin: 0px auto">
+
+                                <div class="p-col-2">
+                                    <p:commandButton oncomplete="PF('dlgCamiones').show()"
+                                                     value="Agregar"
+                                                     action="#{camionController.limpiarComponentes}"
+                                                     immediate="true" update="formAddUpdateCamion:pblCamiones"></p:commandButton>
+                                </div>
+
+                                <p:dataTable id="tblCamiones" widgetVar="tblCamiones" rows="20"
+                                             paginator="true"
+                                             emptyMessage="No se encontraron registros de camiones ....."
+                                             paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
+                                             currentPageReportTemplate="{startRecord}-{endRecord} de {totalRecords} registros"
+                                            filteredValue="#{camionController.camionesFiltrados}"
+                                             rowsPerPageTemplate="20,50,100" var="camion"
+                                             value="#{camionController.camiones}"
+                                             paginatorPosition="bottom">
+
+
+                                    <f:facet name="header">
+                                        Listado de Albums
+                                    </f:facet>
+
+
+                                    <p:column headerText="Placa" filterBy="#{camion.placa}"
+                                              filterMatchMode="contains">
+                                        <p:outputLabel value="#{camion.placa}"></p:outputLabel>
+                                    </p:column>
+                                    <p:column headerText="NumUnidad" filterBy="#{camion.numUnidad}"
+                                              filterMatchMode="contains">
+                                        <p:outputLabel value="#{camion.numUnidad}"></p:outputLabel>
+                                    </p:column>
+                                    <p:column headerText="Marca" filterBy="#{camion.marca}"
+                                              filterMatchMode="contains">
+                                        <p:outputLabel value="#{camion.marca}"></p:outputLabel>
+                                    </p:column>
+                                    <p:column headerText="Color" filterBy="#{camion.color}"
+                                              filterMatchMode="contains">
+                                        <p:outputLabel value="#{camion.color}"></p:outputLabel>
+                                    </p:column>
+                                    <p:column headerText="modelo" filterBy="#{camion.modelo}"
+                                              filterMatchMode="contains">
+                                        <p:outputLabel value="#{camion.modelo}"></p:outputLabel>
+                                    </p:column>
+                                    <p:column headerText="Tipo" filterBy="#{camion.tipo}"
+                                              filterMatchMode="contains">
+                                        <p:outputLabel value="#{camion.tipo}"></p:outputLabel>
+                                    </p:column>
+
+                                    <p:column headerText="Actualizar">
+                                        <p:commandButton icon="pi pi-pencil"
+                                                         style="background-color: green" immediate="true"
+                                                         action="#{camionController.cargarCamion(camion)}"
+                                                         oncomplete="PF('dlgCamiones').show()"
+                                                         update="formAddUpdateCamion:pblCamiones"></p:commandButton>
+                                    </p:column>
+                                </p:dataTable>
+
+                            </div>
+                        </div>
+                    </div>
+
+                    <ui:include src="footer.xhtml"></ui:include>
+
+                </div>
+
+            </h:form>
+
+            <p:dialog id="dlgCamion" header="Agregar o actualizar album"
+                      widgetVar="dlgCamiones" modal="true" responsive="true"
+                      resizable="false" width="50%" height="500">
+
+                <h:form id="formAddUpdateCamion">
+
+
+                    <p:panelGrid id="pblCamiones" columns="1" layout="grid"
+                                 styleClass="ui-panelgrid-blank" columnClasses="ui-g-12">
+
+                        <p:outputLabel id="lblPlaca" value="Placa: " for="txtPlaca"></p:outputLabel>
+                        <p:inputText id="txtPlaca" required="true"
+                                     requiredMessage="El nombre del album es requerido"
+                                     value="#{camionController.camion.placa}"></p:inputText>
+
+                        <p:outputLabel id="lblnumUnidad" value="Unidad: " for="txtUnidad"></p:outputLabel>
+                        <p:inputText id="txtUnidad" required="true"
+                                     requiredMessage="El número de placa es requerido"
+                                     value="#{camionController.camion.numUnidad}"></p:inputText>
+
+                        <p:outputLabel id="lblMarca" value="Marca: " for="txtMarca"></p:outputLabel>
+                        <p:inputText id="txtMarca" required="true"
+                                     requiredMessage="La marca es requerido"
+                                     value="#{camionController.camion.marca}"></p:inputText>
+
+                        <p:outputLabel id="lblColor" value="Color: " for="txtColor"></p:outputLabel>
+                        <p:inputText id="txtColor" required="true"
+                                     requiredMessage="El color es requerido"
+                                     value="#{camionController.camion.color}"></p:inputText>
+
+                        <p:outputLabel id="lblModelo" value="Modelo: " for="txtModelo"></p:outputLabel>
+                        <p:inputText id="txtModelo" required="true"
+                                     requiredMessage="El modelo es requerido"
+                                     value="#{camionController.camion.modelo}"></p:inputText>
+
+                        <p:outputLabel id="lblTipo" value="Tipo: " for="txtTipo"></p:outputLabel>
+                        <p:inputText id="txtTipo" required="true"
+                                     requiredMessage="El tipo es requerido"
+                                     value="#{camionController.camion.tipo}"></p:inputText>
+
+                    </p:panelGrid>
+
+                    <p:panelGrid columns="2" layout="grid"
+                                 styleClass="ui-panelgrid-blank" columnClasses="ui-g-6, ui-g-6">
+                        <p:commandButton value="Guardar"
+                                         update="formCamiones:messages, formAddUpdateCamion:pblCamiones, formCamiones:tblCamiones"
+                                         action="#{camionController.crearCamion()}"></p:commandButton>
+                        <p:commandButton type="button" value="Cancelar"
+                                         style="background-color: red" onclick="PF('dlgCamiones').hide()"></p:commandButton>
+                    </p:panelGrid>
+
+                </h:form>
+            </p:dialog>
+
+        </div>
+    </h:body>
+
+
+
+</html>

@@ -1,0 +1,145 @@
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:ui="http://java.sun.com/jsf/facelets">
+
+
+    <h:head>
+        <ui:include src="scripts.xhtml"></ui:include>
+
+        <style>
+            body .ui-panelgrid .ui-panelgrid-cell {
+                background-color: white
+            }
+        </style>
+    </h:head>
+
+    <h:body style="background-color: black">
+        <div class="ui-fluid">
+            <h:form id="formAgentes">
+
+                <p:growl id="messages" showSummary="true" showDetail="true"
+                         skipDetailIfEqualsSummary="true"></p:growl>
+
+                <ui:include src="navbar.xhtml"></ui:include>
+
+                <div class="p-grid sample-layout">
+
+                    <ui:include src="header.xhtml"></ui:include>
+
+                    <div class="p-col-12 p-md-10 p-col-nogutter"
+                         style="background-color: black">
+                        <div class="p-grid">
+
+                            <div class="p-col-10" style="margin: 0px auto">
+
+                                <div class="p-col-2">
+                                    <p:commandButton oncomplete="PF('dlgAgentes').show()"
+                                                     value="Agregar"
+                                                     action="#{agenteController.limpiarComponentes}"
+                                                     immediate="true" update="formAddUpdateAgente:pblAgentes"></p:commandButton>
+                                </div>
+
+                                <p:dataTable id="tblAgentes" widgetVar="tblAgentes" rows="20"
+                                             paginator="true"
+                                             emptyMessage="No se encontraron registros de agentees ....."
+                                             paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
+                                             currentPageReportTemplate="{startRecord}-{endRecord} de {totalRecords} registros"
+                                             filteredValue="#{agenteController.agentesFiltrados}"
+                                             rowsPerPageTemplate="20,50,100" var="agente"
+                                             value="#{agenteController.agentes}"
+                                             paginatorPosition="bottom">
+
+
+                                    <f:facet name="header">
+                                        Listado de Albums
+                                    </f:facet>
+
+
+                                    <p:column headerText="Cedula" 
+                                              filterMatchMode="contains" filterBy="#{agente.cedula}">
+                                        <p:outputLabel value="#{agente.cedula}"></p:outputLabel>
+                                    </p:column>
+                                    <p:column headerText="Nombre" 
+                                              filterMatchMode="contains" filterBy="#{agente.nombre}">
+                                        <p:outputLabel value="#{agente.nombre}"></p:outputLabel>
+                                    </p:column>
+                                    <p:column headerText="Apellido" 
+                                              filterMatchMode="contains" filterBy="#{agente.apellido}">
+                                        <p:outputLabel value="#{agente.apellido}"></p:outputLabel>
+                                    </p:column>
+                                    <p:column headerText="Tipo" 
+                                              filterMatchMode="contains">
+                                        <p:outputLabel value="#{agente.tipo}"></p:outputLabel>
+                                    </p:column>
+
+
+                                    <p:column headerText="Actualizar">
+                                        <p:commandButton icon="pi pi-pencil"
+                                                         style="background-color: green" immediate="true"
+                                                         action="#{agenteController.cargarAgente(agente)}"
+                                                         oncomplete="PF('dlgAgentes').show()"
+                                                         update="formAddUpdateAgente:pblAgentes"></p:commandButton>
+                                    </p:column>
+                                </p:dataTable>
+
+                            </div>
+                        </div>
+                    </div>
+
+                    <ui:include src="footer.xhtml"></ui:include>
+
+                </div>
+
+            </h:form>
+
+            <p:dialog id="dlgAgente" header="Agregar o actualizar album"
+                      widgetVar="dlgAgentes" modal="true" responsive="true"
+                      resizable="false" width="50%" height="500">
+
+                <h:form id="formAddUpdateAgente">
+
+
+                    <p:panelGrid id="pblAgentes" columns="1" layout="grid"
+                                 styleClass="ui-panelgrid-blank" columnClasses="ui-g-12">
+
+                        <p:outputLabel id="lblCedula" value="Cedula: " for="txtCedula"></p:outputLabel>
+                        <p:inputText id="txtCedula" required="true"
+                                     requiredMessage="La cedula es requerida"
+                                     value="#{agenteController.agente.cedula}"></p:inputText>
+
+                        <p:outputLabel id="lblNombre" value="Nombre: " for="txtNombre"></p:outputLabel>
+                        <p:inputText id="txtNombre" required="true"
+                                     requiredMessage="El nombre de placa es requerido"
+                                     value="#{agenteController.agente.nombre}"></p:inputText>
+
+                        <p:outputLabel id="lblApellido" value="Apellido: " for="txtApellido"></p:outputLabel>
+                        <p:inputText id="txtApellido" required="true"
+                                     requiredMessage="El apellido es requerido"
+                                     value="#{agenteController.agente.apellido}"></p:inputText>
+
+                        <p:outputLabel id="lblTipo" value="Tipo: " for="txtTipo"></p:outputLabel>
+                        <p:inputText id="txtTipo" required="true"
+                                     requiredMessage="El tipo es requerido"
+                                     value="#{agenteController.agente.tipo}"></p:inputText>
+                    </p:panelGrid>
+
+                    <p:panelGrid columns="2" layout="grid"
+                                 styleClass="ui-panelgrid-blank" columnClasses="ui-g-6, ui-g-6">
+                        <p:commandButton value="Guardar"
+                                         update="formAgentes:messages, formAddUpdateAgente:pblAgentes, formAgentes:tblAgentes"
+                                         action="#{agenteController.crearAgente()}"></p:commandButton>
+                        <p:commandButton type="button" value="Cancelar"
+                                         style="background-color: red" onclick="PF('dlgAgentes').hide()"></p:commandButton>
+                    </p:panelGrid>
+
+                </h:form>
+            </p:dialog>
+
+        </div>
+    </h:body>
+
+
+
+</html>
