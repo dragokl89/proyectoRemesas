@@ -1,10 +1,13 @@
+com\mycompany\remesasaproyect\model\Remesa.class
 com\mycompany\remesasaproyect\model\Usuario.class
 com\mycompany\remesasaproyect\service\ServicioCamion.class
 com\mycompany\remesasaproyect\controller\AgenteController.class
 com\mycompany\remesasaproyect\em\MyEntityManager.class
 com\mycompany\remesasaproyect\model\Camion.class
+com\mycompany\remesasaproyect\model\Empresa.class
 com\mycompany\remesasaproyect\service\ServicioAgente.class
 com\mycompany\remesasaproyect\controller\Test.class
+com\mycompany\remesasaproyect\model\Viaje.class
 com\mycompany\remesasaproyect\service\ServicioUsuarioImpl.class
 com\mycompany\remesasaproyect\controller\SessionController.class
 com\mycompany\remesasaproyect\service\ServicioCamionImpl.class
@@ -13,3 +16,4 @@ com\mycompany\remesasaproyect\service\ServicioUsuario.class
 com\mycompany\remesasaproyect\controller\UsuarioController.class
 com\mycompany\remesasaproyect\service\ServicioAgenteImpl.class
 com\mycompany\remesasaproyect\controller\CamionController.class
+com\mycompany\remesasaproyect\model\ViajeAgente.class
