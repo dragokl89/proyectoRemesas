@@ -5,6 +5,7 @@
 package com.mycompany.remesasaproyect.service;
 
 import com.mycompany.remesasaproyect.model.Remesa;
+import com.mycompany.remesasaproyect.model.Viaje;
 import com.mycompany.remesasaproyect.model.ViajeAgente;
 import java.util.List;
 
@@ -13,6 +14,10 @@ import java.util.List;
  * @author c-ado
  */
 public interface ServicioViaje {
+    
+    List<Viaje> listar();
+    
+    void agregarViaje(Viaje viaje);
     void agregarAgente(ViajeAgente viajeAgente);
 	/**
 	 * Metodo que calcula el total de la compra en el carrito del cliente

@@ -3,6 +3,7 @@ C:\Users\c-ado\Documents\NetBeansProjects\RemesasaProyect\src\main\java\com\myco
 C:\Users\c-ado\Documents\NetBeansProjects\RemesasaProyect\src\main\java\com\mycompany\remesasaproyect\service\ServicioCamion.java
 C:\Users\c-ado\Documents\NetBeansProjects\RemesasaProyect\src\main\java\com\mycompany\remesasaproyect\service\ServicioUsuario.java
 C:\Users\c-ado\Documents\NetBeansProjects\RemesasaProyect\src\main\java\com\mycompany\remesasaproyect\service\ServicioViajeImpl.java
+C:\Users\c-ado\Documents\NetBeansProjects\RemesasaProyect\src\main\java\com\mycompany\remesasaproyect\service\ServicioRemesaImpl.java
 C:\Users\c-ado\Documents\NetBeansProjects\RemesasaProyect\src\main\java\com\mycompany\remesasaproyect\service\ServicioViaje.java
 C:\Users\c-ado\Documents\NetBeansProjects\RemesasaProyect\src\main\java\com\mycompany\remesasaproyect\model\Viaje.java
 C:\Users\c-ado\Documents\NetBeansProjects\RemesasaProyect\src\main\java\com\mycompany\remesasaproyect\service\ServicioUsuarioImpl.java
@@ -15,6 +16,7 @@ C:\Users\c-ado\Documents\NetBeansProjects\RemesasaProyect\src\main\java\com\myco
 C:\Users\c-ado\Documents\NetBeansProjects\RemesasaProyect\src\main\java\com\mycompany\remesasaproyect\model\Agente.java
 C:\Users\c-ado\Documents\NetBeansProjects\RemesasaProyect\src\main\java\com\mycompany\remesasaproyect\controller\Test.java
 C:\Users\c-ado\Documents\NetBeansProjects\RemesasaProyect\src\main\java\com\mycompany\remesasaproyect\service\ServicioAgenteImpl.java
+C:\Users\c-ado\Documents\NetBeansProjects\RemesasaProyect\src\main\java\com\mycompany\remesasaproyect\service\ServicioRemesa.java
 C:\Users\c-ado\Documents\NetBeansProjects\RemesasaProyect\src\main\java\com\mycompany\remesasaproyect\model\ViajeAgente.java
 C:\Users\c-ado\Documents\NetBeansProjects\RemesasaProyect\src\main\java\com\mycompany\remesasaproyect\controller\ViajeController.java
 C:\Users\c-ado\Documents\NetBeansProjects\RemesasaProyect\src\main\java\com\mycompany\remesasaproyect\model\Remesa.java

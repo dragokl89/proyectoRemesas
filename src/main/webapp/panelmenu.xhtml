@@ -1,30 +1,31 @@
 
 <ui:composition xmlns="http://www.w3.org/1999/xhtml"
-	xmlns:f="http://java.sun.com/jsf/core"
-	xmlns:h="http://java.sun.com/jsf/html"
-	xmlns:p="http://primefaces.org/ui"
-	xmlns:ui="http://java.sun.com/jsf/facelets">
+                xmlns:f="http://java.sun.com/jsf/core"
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:p="http://primefaces.org/ui"
+                xmlns:ui="http://java.sun.com/jsf/facelets">
 
 
 
-	<p:panelMenu style="width:100%">
+    <p:panelMenu style="width:100%">
 
-		<p:submenu label="Mi Perfil" rendered="true" expanded="true">
-			
-			<p:menuitem value="Usuarios" icon="pi pi-volume-up"
-				action="#{usuarioController.rediccionar('adminUsuarios.xhtml')}"
-				immediate="true"></p:menuitem>
-			<p:menuitem value="Agentes" icon="pi pi-users"
-				action="#{usuarioController.rediccionar('adminAgentes.xhtml')}"
-				></p:menuitem>
-			<p:menuitem value="Camiones" icon="pi pi-lock"
-				action="#{usuarioController.rediccionar('adminCamiones.xhtml')}"
-				></p:menuitem>
-                    	<p:menuitem value="Autorizar remesas" icon="pi pi-lock"
-				action="#{usuarioController.rediccionar('adminUsuarios.xhtml')}"
-				></p:menuitem>
-		</p:submenu>
+        <p:submenu label="Mi Perfil" rendered="true" expanded="true">
 
-	</p:panelMenu>
+            <p:menuitem value="Usuarios" icon="pi pi-volume-up"
+                        action="#{usuarioController.rediccionar('adminUsuarios.xhtml')}"
+                        immediate="true"></p:menuitem>
+            <p:menuitem value="Agentes" icon="pi pi-users"
+                        action="#{usuarioController.rediccionar('adminAgentes.xhtml')}"
+                        ></p:menuitem>
+            <p:menuitem value="Camiones" icon="pi pi-lock"
+                        action="#{usuarioController.rediccionar('adminCamiones.xhtml')}"
+                        ></p:menuitem>
+
+            <p:menuitem value="Autorizar remesas" icon="pi pi-lock"
+                        action="#{usuarioController.rediccionar('adminRemesa.xhtml')}"
+                        ></p:menuitem>
+        </p:submenu>
+
+    </p:panelMenu>
 
 </ui:composition>
