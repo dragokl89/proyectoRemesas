@@ -1,0 +1,159 @@
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:ui="http://java.sun.com/jsf/facelets">
+
+
+    <h:head>
+        <ui:include src="scripts.xhtml"></ui:include>
+
+        <style>
+            body .ui-panelgrid .ui-panelgrid-cell {
+                background-color: white
+            }
+            .ui-selectonemenu-panel.hideDisabled .ui-selectonemenu-item.ui-state-disabled {
+                display: none;
+            }
+        </style>
+    </h:head>
+
+    <h:body style="background-color: black">
+        <div class="ui-fluid">
+            <h:form id="formRemesas">
+
+                <p:growl id="messages" showSummary="true" showDetail="true"
+                         skipDetailIfEqualsSummary="true"></p:growl>
+
+                <ui:include src="navbar.xhtml"></ui:include>
+
+                <div class="p-grid sample-layout">
+
+                    <ui:include src="header.xhtml"></ui:include>
+
+                    <div class="p-col-12 p-md-10 p-col-nogutter"
+                         style="background-color: black">
+                        <div class="p-grid">
+
+                            <div class="p-col-10" style="margin: 0px auto">
+
+
+
+                                <p:dataTable id="tblRemesas" widgetVar="tblRemesas" rows="20"
+                                             paginator="true"
+                                             emptyMessage="No se encontraron registros de remesas..."
+                                             paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
+                                             currentPageReportTemplate="{startRecord}-{endRecord} de {totalRecords} registros"
+                                             filteredValue="#{viajeController.remesasFiltradas}"
+                                             rowsPerPageTemplate="20,50,100" var="remesa"
+                                             value="#{viajeController.remesas}"
+                                             paginatorPosition="bottom">
+
+
+                                    <f:facet name="header">
+                                        Listado de Remesas
+                                    </f:facet>
+
+
+                                    <p:column headerText="Nombre" >
+                                        <p:outputLabel value="#{remesa.usuario.nombre}"></p:outputLabel>
+                                    </p:column>
+
+                                    <p:column headerText="Valor" >
+                                        <p:outputLabel value="#{remesa.valor}"></p:outputLabel>
+                                    </p:column>
+
+                                    <p:column headerText="Tipo" >
+                                        <p:outputLabel value="#{remesa.tipo}"></p:outputLabel>
+                                    </p:column>
+
+                                    <p:column headerText="Empresa" >
+                                        <p:outputLabel value="#{remesa.empresa.nombre}"></p:outputLabel>
+                                    </p:column>
+
+                                    <p:column headerText="Estado" >
+                                        <p:outputLabel value="#{remesa.estado}"></p:outputLabel>
+                                    </p:column>
+
+                                    <p:column headerText="Administrar">
+
+                                        <p:commandButton icon="pi pi-pencil"
+                                                         style="background-color: green" immediate="true"
+                                                         action="#{viajeController.cargarRemesa(remesa)}"
+                                                         oncomplete="PF('dlgRemesas').show()"
+                                                         update="formAddUpdateRemesa:pblRemesas"></p:commandButton>
+
+                                    </p:column>
+                                </p:dataTable>
+
+                            </div>
+                        </div>
+                    </div>
+
+                    <ui:include src="footer.xhtml"></ui:include>
+
+                </div>
+
+            </h:form>
+
+            <p:dialog id="dlgRemesa" header="Agregar o actualizar remesa"
+                      widgetVar="dlgRemesas" modal="true" responsive="true"
+                      resizable="false" width="50%" height="500">
+
+                <h:form id="formAddUpdateRemesa">
+                    <p:panelGrid id="pblRemesas" columns="1" layout="grid"
+                                 styleClass="ui-panelgrid-blank" columnClasses="ui-g-12">
+
+                        <p:outputLabel id="lblCamion" value="Camion: " for="cboCamion"></p:outputLabel>
+                        <p:selectOneMenu id="cboCamion" required="true" panelStyleClass="hideDisabled"
+                                         requiredMessage="El Camión es requerido" 
+                                         value="#{viajeController.camion.idcamion}" >
+                            <f:selectItem itemValue="" itemLabel="Seleccione"></f:selectItem>
+                            <f:selectItems var="camion"
+                                           value="#{viajeController.camiones}"
+                                           itemValue="#{camion.idcamion}" itemLabel="#{camion.numUnidad}" ></f:selectItems>
+                        </p:selectOneMenu>
+
+                        <p:outputLabel id="lblPilto" value="Piloto: " for="cboPiloto"></p:outputLabel>
+                        <p:selectOneMenu id="cboPiloto" required="true" panelStyleClass="hideDisabled"
+                                         requiredMessage="El Piloto es requerido" 
+                                         value="#{viajeController.piloto.idagente}" >
+                            <f:selectItem itemValue="" itemLabel="Seleccione"></f:selectItem>
+                            <f:selectItems var="piloto"
+                                           value="#{viajeController.agentes}"
+                                           itemValue="#{piloto.idagente}" itemLabel="#{piloto.nombre}" itemDisabled="#{!viajeController.esPiloto(piloto)}"></f:selectItems>
+                        </p:selectOneMenu>
+
+                        <p:outputLabel id="lblEscolta" value="Escolta: " for="cboEscolta"></p:outputLabel>
+                        <p:selectOneMenu id="cboEscolta" required="true" panelStyleClass="hideDisabled"
+                                         requiredMessage="El Escolta es requerido" 
+                                         value="#{viajeController.escolta.idagente}" >
+                            <f:selectItem itemValue="" itemLabel="Seleccione"></f:selectItem>
+                            <f:selectItems var="escolta"
+                                           value="#{viajeController.agentes}"
+                                           itemValue="#{escolta.idagente}" itemLabel="#{escolta.nombre}" itemDisabled="#{viajeController.esPiloto(escolta)}"></f:selectItems>
+                        </p:selectOneMenu>
+
+
+                    </p:panelGrid>
+
+                    <p:panelGrid columns="2" layout="grid"
+                                 styleClass="ui-panelgrid-blank" columnClasses="ui-g-6, ui-g-6">
+                        <p:commandButton value="Aprobar"  
+                                         update="formRemesas:messages, formAddUpdateRemesa:pblRemesas, formRemesas:tblRemesas"
+                                         action="#{viajeController.aprobarRemesa}"></p:commandButton>
+
+                        <p:commandButton value="Rechazar"
+                                         style="background-color: red" immediate="true"
+                                         update="formRemesas:messages, formAddUpdateRemesa:pblRemesas, formRemesas:tblRemesas"
+                                         action="#{viajeController.rechazarRemesa()}" ></p:commandButton>           
+
+                        <p:commandButton immediate="true" type="button" value="Cancelar"
+                                         style="background-color: gray" onclick="PF('dlgRemesas').hide()"></p:commandButton>
+                    </p:panelGrid>
+                </h:form>
+            </p:dialog>
+
+        </div>
+    </h:body>
+</html>

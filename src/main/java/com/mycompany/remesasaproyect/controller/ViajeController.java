@@ -90,7 +90,21 @@ public class ViajeController implements Serializable {
             this.servicioViaje.agregarAgente(viajeEscolta);
 
             this.remesa.setViaje(this.viaje);
-            remesa.setEstado("aprobada");
+            remesa.setEstado("Aprobada");
+            servicioRemesa.crear(remesa);
+        } catch (Exception e) {
+            System.out.println("F papu");
+        } finally {
+            remesa = new Remesa();
+            remesas = servicioRemesa.listar();
+            PrimeFaces.current().executeScript("PF('dlgRemesas').hide()");
+            this.bandera = false;
+        }
+    }
+    
+    public void rechazarRemesa() {
+        try {
+            remesa.setEstado("Rechazada");
             servicioRemesa.crear(remesa);
         } catch (Exception e) {
             System.out.println("F papu");

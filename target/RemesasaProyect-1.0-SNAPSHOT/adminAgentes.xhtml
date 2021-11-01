@@ -120,9 +120,14 @@
                                      value="#{agenteController.agente.apellido}"></p:inputText>
 
                         <p:outputLabel id="lblTipo" value="Tipo: " for="txtTipo"></p:outputLabel>
-                        <p:inputText id="txtTipo" required="true"
-                                     requiredMessage="El tipo es requerido"
-                                     value="#{agenteController.agente.tipo}"></p:inputText>
+                        <p:selectOneMenu id="txtTipo" required="true"
+                                         requiredMessage="El tipo es requerido"
+                                         value="#{agenteController.agente.tipo}">
+                            <f:selectItem itemLabel="Seleccionar" itemValue=""/>
+                            <f:selectItem itemLabel="Conductor" itemValue="Conductor"/>
+                            <f:selectItem itemLabel="Escolta" itemValue="Escolta"/>
+                         
+                        </p:selectOneMenu>
                     </p:panelGrid>
 
                     <p:panelGrid columns="2" layout="grid"

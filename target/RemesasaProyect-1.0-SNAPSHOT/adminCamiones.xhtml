@@ -46,7 +46,7 @@
                                              emptyMessage="No se encontraron registros de camiones ....."
                                              paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
                                              currentPageReportTemplate="{startRecord}-{endRecord} de {totalRecords} registros"
-                                            filteredValue="#{camionController.camionesFiltrados}"
+                                             filteredValue="#{camionController.camionesFiltrados}"
                                              rowsPerPageTemplate="20,50,100" var="camion"
                                              value="#{camionController.camiones}"
                                              paginatorPosition="bottom">
@@ -137,9 +137,16 @@
                                      value="#{camionController.camion.modelo}"></p:inputText>
 
                         <p:outputLabel id="lblTipo" value="Tipo: " for="txtTipo"></p:outputLabel>
-                        <p:inputText id="txtTipo" required="true"
-                                     requiredMessage="El tipo es requerido"
-                                     value="#{camionController.camion.tipo}"></p:inputText>
+                        <p:selectOneMenu id="txtTipo" required="true"
+                                         requiredMessage="El tipo es requerido"
+                                         value="#{camionController.camion.tipo}">
+                            <f:selectItem itemLabel="Seleccionar" itemValue=""/>
+                            <f:selectItem itemLabel="Blindado" itemValue="Blindado"/>
+                            <f:selectItem itemLabel="Pick-Up" itemValue="Pick-Up"/>
+                            <f:selectItem itemLabel="Particular" itemValue="Particular"/>
+
+
+                        </p:selectOneMenu>
 
                     </p:panelGrid>
 

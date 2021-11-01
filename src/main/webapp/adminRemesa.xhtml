@@ -75,12 +75,14 @@
                                         <p:outputLabel value="#{remesa.estado}"></p:outputLabel>
                                     </p:column>
 
-                                    <p:column headerText="Actualizar">
+                                    <p:column headerText="Administrar">
+
                                         <p:commandButton icon="pi pi-pencil"
                                                          style="background-color: green" immediate="true"
                                                          action="#{viajeController.cargarRemesa(remesa)}"
                                                          oncomplete="PF('dlgRemesas').show()"
                                                          update="formAddUpdateRemesa:pblRemesas"></p:commandButton>
+
                                     </p:column>
                                 </p:dataTable>
 
@@ -134,16 +136,20 @@
 
 
                     </p:panelGrid>
-                    
+
                     <p:panelGrid columns="2" layout="grid"
                                  styleClass="ui-panelgrid-blank" columnClasses="ui-g-6, ui-g-6">
-                        <p:commandButton value="Guardar"  
+                        <p:commandButton value="Aprobar"  
                                          update="formRemesas:messages, formAddUpdateRemesa:pblRemesas, formRemesas:tblRemesas"
                                          action="#{viajeController.aprobarRemesa}"></p:commandButton>
 
+                        <p:commandButton value="Rechazar"
+                                         style="background-color: red" immediate="true"
+                                         update="formRemesas:messages, formAddUpdateRemesa:pblRemesas, formRemesas:tblRemesas"
+                                         action="#{viajeController.rechazarRemesa()}" ></p:commandButton>           
 
                         <p:commandButton immediate="true" type="button" value="Cancelar"
-                                         style="background-color: red" onclick="PF('dlgRemesas').hide()"></p:commandButton>
+                                         style="background-color: gray" onclick="PF('dlgRemesas').hide()"></p:commandButton>
                     </p:panelGrid>
                 </h:form>
             </p:dialog>
