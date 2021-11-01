@@ -90,7 +90,7 @@ public class ViajeController implements Serializable {
             this.servicioViaje.agregarAgente(viajeEscolta);
 
             this.remesa.setViaje(this.viaje);
-            remesa.setEstado("Aprobada");
+            remesa.setEstado("aprobada");
             servicioRemesa.crear(remesa);
         } catch (Exception e) {
             System.out.println("F papu");
@@ -102,6 +102,14 @@ public class ViajeController implements Serializable {
         }
     }
 
+    
+    public boolean esPiloto(Agente agen){
+        if(agen.getTipo().equals("Piloto")){
+            return true;
+        }
+        return false;
+    }
+    
     public void cargarRemesa(Remesa remesa) {
     this.remesa = remesa;
     }

@@ -28,7 +28,6 @@ public class Usuario {
     private String contrasena;
     @Column
     private String rol;
-    
     @Column
     private int estado;
 

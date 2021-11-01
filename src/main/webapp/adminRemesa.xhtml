@@ -12,6 +12,9 @@
             body .ui-panelgrid .ui-panelgrid-cell {
                 background-color: white
             }
+            .ui-selectonemenu-panel.hideDisabled .ui-selectonemenu-item.ui-state-disabled {
+                display: none;
+            }
         </style>
     </h:head>
 
@@ -98,22 +101,53 @@
                 <h:form id="formAddUpdateRemesa">
                     <p:panelGrid id="pblRemesas" columns="1" layout="grid"
                                  styleClass="ui-panelgrid-blank" columnClasses="ui-g-12">
-                        
-                        
-                        
-                        
-                                         
-                                         
-                                         
-                                         
 
+                        <p:outputLabel id="lblCamion" value="Camion: " for="cboCamion"></p:outputLabel>
+                        <p:selectOneMenu id="cboCamion" required="true" panelStyleClass="hideDisabled"
+                                         requiredMessage="El Camión es requerido" 
+                                         value="#{viajeController.camion.idcamion}" >
+                            <f:selectItem itemValue="" itemLabel="Seleccione"></f:selectItem>
+                            <f:selectItems var="camion"
+                                           value="#{viajeController.camiones}"
+                                           itemValue="#{camion.idcamion}" itemLabel="#{camion.numUnidad}" ></f:selectItems>
+                        </p:selectOneMenu>
+
+                        <p:outputLabel id="lblPilto" value="Piloto: " for="cboPiloto"></p:outputLabel>
+                        <p:selectOneMenu id="cboPiloto" required="true" panelStyleClass="hideDisabled"
+                                         requiredMessage="El Piloto es requerido" 
+                                         value="#{viajeController.piloto.idagente}" >
+                            <f:selectItem itemValue="" itemLabel="Seleccione"></f:selectItem>
+                            <f:selectItems var="piloto"
+                                           value="#{viajeController.agentes}"
+                                           itemValue="#{piloto.idagente}" itemLabel="#{piloto.nombre}" itemDisabled="#{!viajeController.esPiloto(piloto)}"></f:selectItems>
+                        </p:selectOneMenu>
+
+                        <p:outputLabel id="lblEscolta" value="Escolta: " for="cboEscolta"></p:outputLabel>
+                        <p:selectOneMenu id="cboEscolta" required="true" panelStyleClass="hideDisabled"
+                                         requiredMessage="El Escolta es requerido" 
+                                         value="#{viajeController.escolta.idagente}" >
+                            <f:selectItem itemValue="" itemLabel="Seleccione"></f:selectItem>
+                            <f:selectItems var="escolta"
+                                           value="#{viajeController.agentes}"
+                                           itemValue="#{escolta.idagente}" itemLabel="#{escolta.nombre}" itemDisabled="#{viajeController.esPiloto(escolta)}"></f:selectItems>
+                        </p:selectOneMenu>
+
+
+                    </p:panelGrid>
+                    
+                    <p:panelGrid columns="2" layout="grid"
+                                 styleClass="ui-panelgrid-blank" columnClasses="ui-g-6, ui-g-6">
+                        <p:commandButton value="Guardar"  
+                                         update="formRemesas:messages, formAddUpdateRemesa:pblRemesas, formRemesas:tblRemesas"
+                                         action="#{viajeController.aprobarRemesa}"></p:commandButton>
+
+
+                        <p:commandButton immediate="true" type="button" value="Cancelar"
+                                         style="background-color: red" onclick="PF('dlgRemesas').hide()"></p:commandButton>
                     </p:panelGrid>
                 </h:form>
             </p:dialog>
 
         </div>
     </h:body>
-
-
-
 </html>
