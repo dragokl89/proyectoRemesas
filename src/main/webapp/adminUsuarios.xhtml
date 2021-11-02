@@ -64,6 +64,10 @@
                                     <p:column headerText="Contraseña" >
                                         <p:outputLabel value="#{usuario.contrasena}"></p:outputLabel>
                                     </p:column>
+                                    
+                                    <p:column headerText="Habilitado" >
+                                        <p:outputLabel value="#{usuario.estado}"></p:outputLabel>
+                                    </p:column>
 
                                     <p:column headerText="Actualizar">
                                         <p:commandButton icon="pi pi-pencil"
@@ -84,7 +88,7 @@
 
             </h:form>
 
-            <p:dialog id="dlgAlbum" header="Agregar o actualizar album"
+            <p:dialog id="dlgAlbum" header="Agregar o actualizar usuario"
                       widgetVar="dlgAlbums" modal="true" responsive="true"
                       resizable="false" width="50%" height="500">
 
@@ -103,6 +107,20 @@
                         <p:inputText id="txtPassword" required="true"
                                      requiredMessage="El contrasena es requerida"
                                      value="#{usuarioController.usuario.contrasena}"></p:inputText>
+                        
+                        <p:outputLabel id="lblRol" value="Rol: " for="txtRol"></p:outputLabel>
+                        <p:selectOneMenu id="txtRol" required="true"
+                                         requiredMessage="El rol es requerido"
+                                         value="#{usuarioController.usuario.rol}">
+                            <f:selectItem itemLabel="Seleccionar" itemValue=""/>
+                            <f:selectItem itemLabel="Administrador" itemValue="admin"/>
+                            <f:selectItem itemLabel="Cliente" itemValue="cliente"/>
+
+                        </p:selectOneMenu>
+
+                        <p:outputLabel id="lblHabilitar" value="Habilitar" for="txtHabilitar"></p:outputLabel>
+                        <p:toggleSwitch id="txtHabilitar" required="false"
+                                        value="#{usuarioController.usuario.estado}"></p:toggleSwitch>
                     </p:panelGrid>
                     <p:panelGrid columns="2" layout="grid"
                                  styleClass="ui-panelgrid-blank" columnClasses="ui-g-6, ui-g-6">

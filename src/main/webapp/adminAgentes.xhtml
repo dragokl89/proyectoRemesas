@@ -74,6 +74,9 @@
                                         <p:outputLabel value="#{agente.tipo}"></p:outputLabel>
                                     </p:column>
 
+                                    <p:column headerText="Habilitado" >
+                                        <p:outputLabel value="#{agente.estado}"></p:outputLabel>
+                                    </p:column>
 
                                     <p:column headerText="Actualizar">
                                         <p:commandButton icon="pi pi-pencil"
@@ -126,8 +129,12 @@
                             <f:selectItem itemLabel="Seleccionar" itemValue=""/>
                             <f:selectItem itemLabel="Conductor" itemValue="Conductor"/>
                             <f:selectItem itemLabel="Escolta" itemValue="Escolta"/>
-                         
+
                         </p:selectOneMenu>
+
+                        <p:outputLabel id="lblHabilitar" value="Habilitar" for="txtHabilitar"></p:outputLabel>
+                        <p:toggleSwitch id="txtHabilitar" required="false"
+                                        value="#{agenteController.agente.estado}"></p:toggleSwitch>
                     </p:panelGrid>
 
                     <p:panelGrid columns="2" layout="grid"

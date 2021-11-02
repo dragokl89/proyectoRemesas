@@ -33,16 +33,16 @@ public class Agente {
     @Column 
     private byte[] fotografia;
 
-    public int getEstado() {
+    public boolean getEstado() {
         return estado;
     }
 
-    public void setEstado(int estado) {
+    public void setEstado(boolean estado) {
         this.estado = estado;
     }
     
     @Column
-    private int estado;
+    private boolean estado;
 
     public int getIdagente() {
         return idagente;

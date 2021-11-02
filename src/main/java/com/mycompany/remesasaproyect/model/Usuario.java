@@ -29,17 +29,17 @@ public class Usuario {
     @Column
     private String rol;
     @Column
-    private int estado;
+    private boolean estado;
 
     public String getRol() {
         return rol;
     }
 
-    public int getEstado() {
+    public boolean getEstado() {
         return estado;
     }
 
-    public void setEstado(int estado) {
+    public void setEstado(boolean estado) {
         this.estado = estado;
     }
 

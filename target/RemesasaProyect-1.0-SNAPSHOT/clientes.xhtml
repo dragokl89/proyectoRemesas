@@ -26,7 +26,7 @@
 
                 <div class="p-grid sample-layout">
 
-                    <ui:include src="header.xhtml"></ui:include>
+                    
 
                     <div class="p-col-12 p-md-10 p-col-nogutter"
                          style="background-color: black">
@@ -36,7 +36,7 @@
 
                                 <div class="p-col-2">
                                     <p:commandButton oncomplete="PF('dlgAlbums').show()"
-                                                     value="Agregar"
+                                                     value="Nueva Remesa"
                                                      action="#{usuarioController.limpiarComponentes}"
                                                      immediate="true" update="formAddUpdateAlbum:pblAlbums"></p:commandButton>
                                 </div>
@@ -53,29 +53,23 @@
 
 
                                     <f:facet name="header">
-                                        Listado de Albums
+                                        Listado de Remesas
                                     </f:facet>
 
 
-                                    <p:column headerText="Nombre" filterBy="#{usuario.nombre}" filterMatchMode="contains">
+                                    <p:column headerText="Empresa" filterBy="#{usuario.nombre}" filterMatchMode="contains">
                                         <p:outputLabel value="#{usuario.nombre}"></p:outputLabel>
                                     </p:column>
 
-                                    <p:column headerText="Contraseña" >
+                                    <p:column headerText="Valor" >
                                         <p:outputLabel value="#{usuario.contrasena}"></p:outputLabel>
                                     </p:column>
                                     
-                                    <p:column headerText="Habilitado" >
+                                    <p:column headerText="Estado" >
                                         <p:outputLabel value="#{usuario.estado}"></p:outputLabel>
                                     </p:column>
 
-                                    <p:column headerText="Actualizar">
-                                        <p:commandButton icon="pi pi-pencil"
-                                                         style="background-color: green" immediate="true"
-                                                         action="#{usuarioController.cargarUsuario(usuario)}"
-                                                         oncomplete="PF('dlgAlbums').show()"
-                                                         update="formAddUpdateAlbum:pblAlbums"></p:commandButton>
-                                    </p:column>
+                                    
                                 </p:dataTable>
 
                             </div>
@@ -88,7 +82,7 @@
 
             </h:form>
 
-            <p:dialog id="dlgAlbum" header="Agregar o actualizar usuario"
+            <p:dialog id="dlgAlbum" header="Enviar o recibir nueva remesa"
                       widgetVar="dlgAlbums" modal="true" responsive="true"
                       resizable="false" width="50%" height="500">
 
@@ -98,29 +92,26 @@
                     <p:panelGrid id="pblAlbums" columns="1" layout="grid"
                                  styleClass="ui-panelgrid-blank" columnClasses="ui-g-12">
 
-                        <p:outputLabel id="lblNombre" value="Nombre: " for="txtNombre"></p:outputLabel>
-                        <p:inputText id="txtNombre" required="true"
-                                     requiredMessage="El nombre del album es requerido"
+                        <p:outputLabel id="lblEmpresa" value="Empresa: " for="txtEmpresa"></p:outputLabel>
+                        <p:inputText id="txtEmpresa" required="true"
+                                     requiredMessage="La empresa es requerida"
                                      value="#{usuarioController.usuario.nombre}"></p:inputText>
 
-                        <p:outputLabel id="lblPassWord" value="Contraseña: " for="txtPassword"></p:outputLabel>
-                        <p:inputText id="txtPassword" required="true"
-                                     requiredMessage="El contrasena es requerida"
+                        <p:outputLabel id="lblValor" value="Valor: " for="txtValor"></p:outputLabel>
+                        <p:inputText id="txtValor" required="true"
+                                     requiredMessage="El valor es requerido"
                                      value="#{usuarioController.usuario.contrasena}"></p:inputText>
                         
-                        <p:outputLabel id="lblRol" value="Rol: " for="txtRol"></p:outputLabel>
-                        <p:selectOneMenu id="txtRol" required="true"
+                        <p:outputLabel id="lblTipo" value="Tipo: " for="txtTipo"></p:outputLabel>
+                        <p:selectOneMenu id="txtTipo" required="true"
                                          requiredMessage="El rol es requerido"
                                          value="#{usuarioController.usuario.rol}">
                             <f:selectItem itemLabel="Seleccionar" itemValue=""/>
-                            <f:selectItem itemLabel="Administrador" itemValue="admin"/>
-                            <f:selectItem itemLabel="Cliente" itemValue="cliente"/>
+                            <f:selectItem itemLabel="Envío" itemValue="enviar"/>
+                            <f:selectItem itemLabel="Recepción" itemValue="recibir"/>
 
                         </p:selectOneMenu>
 
-                        <p:outputLabel id="lblHabilitar" value="Habilitar" for="txtHabilitar"></p:outputLabel>
-                        <p:toggleSwitch id="txtHabilitar" required="false"
-                                        value="#{usuarioController.usuario.estado}"></p:toggleSwitch>
                     </p:panelGrid>
                     <p:panelGrid columns="2" layout="grid"
                                  styleClass="ui-panelgrid-blank" columnClasses="ui-g-6, ui-g-6">

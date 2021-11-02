@@ -73,7 +73,7 @@ public class AgenteController implements Serializable {
         try {
             if (!existeAgente()|| bandera) {
                 if (!bandera) {
-                    agente.setEstado(1);
+                    agente.setEstado(true);
                 }
                 servicio.crear(this.agente);
             } else {

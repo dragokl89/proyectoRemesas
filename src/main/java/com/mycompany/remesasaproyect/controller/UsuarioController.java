@@ -79,7 +79,7 @@ public class UsuarioController implements Serializable {
             } else {
                 session.setUsuario(persona);
                 System.out.println(session.getUsuario().getNombre());
-
+                rediccionar("clientes.xhtml");
             }
         } else {
             FacesContext.getCurrentInstance().addMessage("loginForm",
@@ -134,7 +134,7 @@ public class UsuarioController implements Serializable {
             System.out.println("Hola mundo2");
             if (!existeUsuario() || bandera) {
                 if (!bandera) {
-                    usuario.setEstado(1);
+                    usuario.setEstado(true);
                 }
                 servicio.crear(usuario);
             } else {
