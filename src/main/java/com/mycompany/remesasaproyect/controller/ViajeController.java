@@ -118,7 +118,7 @@ public class ViajeController implements Serializable {
 
     
     public boolean esPiloto(Agente agen){
-        if(agen.getTipo().equals("Piloto")){
+        if(agen.getTipo().equals("Conductor")){
             return true;
         }
         return false;

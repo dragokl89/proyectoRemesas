@@ -34,10 +34,11 @@ public class ServicioUsuarioImpl implements ServicioUsuario {
     public void crear(Usuario persona) {
 
         EntityManager em = emf.createEntityManager();
-        //persona.setRol("cliente");
+        persona.setRol("cliente");
         em.getTransaction().begin();
         try {
             if (persona.getIdUsuario() == 0) {
+
                 em.persist(persona);
              
             } else {

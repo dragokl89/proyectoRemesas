@@ -33,7 +33,7 @@ public class Remesa {
     private Viaje viaje;
 
     @ManyToOne
-    @JoinColumn(name = "idusuario")
+    @JoinColumn(name = "idUsuario")
     private Usuario usuario;
 
     @ManyToOne

@@ -5,6 +5,7 @@
 package com.mycompany.remesasaproyect.service;
 
 import com.mycompany.remesasaproyect.model.Remesa;
+import com.mycompany.remesasaproyect.model.Usuario;
 import java.util.List;
 
 /**
@@ -14,5 +15,6 @@ import java.util.List;
 public interface ServicioRemesa {
     List<Remesa> listar();
     void crear(Remesa remesa);
+    List<Remesa> listar(Usuario usuario);
     
 }

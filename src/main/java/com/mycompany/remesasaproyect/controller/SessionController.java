@@ -4,8 +4,11 @@
  */
 package com.mycompany.remesasaproyect.controller;
 
+import com.mycompany.remesasaproyect.model.Remesa;
 import com.mycompany.remesasaproyect.model.Usuario;
 import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.List;
 import javax.annotation.PostConstruct;
 import javax.enterprise.context.SessionScoped;
 import javax.inject.Named;
@@ -17,11 +20,11 @@ public class SessionController implements Serializable {
     private static final long serialVersionUID = 1L;
     private Usuario usuario;
 
+ 
     @PostConstruct
     public void init() {
         System.out.println("***********************************");
         System.out.println("ingresamos a una nueva sesion");
-
     }
 
     public Usuario getUsuario() {

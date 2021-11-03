@@ -4,7 +4,9 @@
  */
 package com.mycompany.remesasaproyect.controller;
 
+import com.mycompany.remesasaproyect.model.Remesa;
 import com.mycompany.remesasaproyect.model.Usuario;
+import com.mycompany.remesasaproyect.service.ServicioRemesa;
 import com.mycompany.remesasaproyect.service.ServicioUsuario;
 import java.io.IOException;
 import java.io.Serializable;
@@ -31,7 +33,8 @@ public class UsuarioController implements Serializable {
 
     @Inject
     private EntityManager entityManager;
-
+    @Inject
+    private ServicioRemesa servicioRemesa;
     private String nombre;
     private String contrasena;
     private List<Usuario> usuarios;
@@ -67,7 +70,12 @@ public class UsuarioController implements Serializable {
         this.bandera = false;
  
     }
-
+    public boolean esAdmin(Usuario aux){
+        if(aux.getRol().equals("admin")){
+            return true;
+        }
+        return false;
+    }
     public void ingresar() {
 
         Usuario persona = coincidenCredenciales();
@@ -75,6 +83,7 @@ public class UsuarioController implements Serializable {
         if (persona != null) {
             if (persona.getRol().equals("admin")) {
                 session.setUsuario(persona);
+                
                 rediccionar("adminUsuarios.xhtml");
             } else {
                 session.setUsuario(persona);
@@ -88,6 +97,7 @@ public class UsuarioController implements Serializable {
         }
 
     }
+    
 
     /**
      * Metodo que redireccion a la persona a la pagina deseada

@@ -42,7 +42,7 @@
                                 </div>
 
                                 <p:dataTable id="tblAlbums" widgetVar="tblAlbums" rows="20"
-                                             paginator="true"
+                                             paginator="true" rowStyleClass="#{usuario.rol == 'admin' ? 'ui-helper-hidden' : ''}"
                                              emptyMessage="No se encontraron registros de albums..."
                                              paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
                                              currentPageReportTemplate="{startRecord}-{endRecord} de {totalRecords} registros"
@@ -108,15 +108,6 @@
                                      requiredMessage="El contrasena es requerida"
                                      value="#{usuarioController.usuario.contrasena}"></p:inputText>
                         
-                        <p:outputLabel id="lblRol" value="Rol: " for="txtRol"></p:outputLabel>
-                        <p:selectOneMenu id="txtRol" required="true"
-                                         requiredMessage="El rol es requerido"
-                                         value="#{usuarioController.usuario.rol}">
-                            <f:selectItem itemLabel="Seleccionar" itemValue=""/>
-                            <f:selectItem itemLabel="Administrador" itemValue="admin"/>
-                            <f:selectItem itemLabel="Cliente" itemValue="cliente"/>
-
-                        </p:selectOneMenu>
 
                         <p:outputLabel id="lblHabilitar" value="Habilitar" for="txtHabilitar"></p:outputLabel>
                         <p:toggleSwitch id="txtHabilitar" required="false"

@@ -6,8 +6,10 @@ package com.mycompany.remesasaproyect.service;
 
 import com.mycompany.remesasaproyect.model.Remesa;
 import com.mycompany.remesasaproyect.model.Remesa;
+import com.mycompany.remesasaproyect.model.Usuario;
 import java.util.List;
 import javax.enterprise.context.ApplicationScoped;
+import javax.inject.Inject;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
@@ -20,8 +22,10 @@ import javax.persistence.Persistence;
 public class ServicioRemesaImpl implements ServicioRemesa {
 
     private static final EntityManagerFactory emf = Persistence.createEntityManagerFactory("my_persistence_unit");
-    
-    
+
+    @Inject
+    EntityManager em;
+
     @SuppressWarnings("unchecked")
     @Override
     public List<Remesa> listar() {
@@ -47,6 +51,13 @@ public class ServicioRemesaImpl implements ServicioRemesa {
         } finally {
             em.close();
         }
+    }
+
+    @Override
+    public List<Remesa> listar(Usuario usr) {
+        int gender;
+        gender = usr.getIdUsuario();
+        return em.createQuery("select E from Remesa E WHERE E.usuario = :usr",Remesa.class).setParameter("usr", usr).getResultList();
     }
 
 }

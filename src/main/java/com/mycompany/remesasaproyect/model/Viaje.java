@@ -4,6 +4,7 @@
  */
 package com.mycompany.remesasaproyect.model;
 
+import java.time.LocalDateTime;
 import java.util.List;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -24,17 +25,21 @@ import javax.persistence.Table;
 @Table(name = "viaje")
 @NamedQuery(name = "Viaje.findAll", query = "select E from Viaje E")
 public class Viaje {
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column
     private int idviaje;
-    
+
     @OneToMany(mappedBy = "viaje")
     private List<ViajeAgente> viajeAgentes;
-    
+
     @ManyToOne
     @JoinColumn(name = "idcamion")
     private Camion camion;
+
+    @Column(name = "fecha")
+    private LocalDateTime fecha;
 
     public int getIdviaje() {
         return idviaje;

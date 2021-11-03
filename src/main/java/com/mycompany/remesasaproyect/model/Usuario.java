@@ -18,6 +18,7 @@ import javax.persistence.NamedQuery;
 @Entity
 @NamedQuery(name = "Usuario.findAll", query = "select E from Usuario E")
 public class Usuario {
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column
@@ -71,5 +72,4 @@ public class Usuario {
         this.contrasena = contrasena;
     }
 
-    
 }

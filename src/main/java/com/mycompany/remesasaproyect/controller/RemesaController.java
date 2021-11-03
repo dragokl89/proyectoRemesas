@@ -4,21 +4,20 @@
  */
 package com.mycompany.remesasaproyect.controller;
 
+import com.mycompany.remesasaproyect.model.Empresa;
 import com.mycompany.remesasaproyect.model.Remesa;
 import com.mycompany.remesasaproyect.model.Usuario;
+import com.mycompany.remesasaproyect.service.ServicioEmpresa;
 import com.mycompany.remesasaproyect.service.ServicioRemesa;
-import com.mycompany.remesasaproyect.service.ServicioUsuario;
 import java.io.IOException;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 import javax.annotation.PostConstruct;
-import javax.faces.application.FacesMessage;
-import javax.faces.view.ViewScoped;
 import javax.faces.context.FacesContext;
+import javax.faces.view.ViewScoped;
 import javax.inject.Inject;
 import javax.inject.Named;
-import javax.persistence.EntityManager;
 import org.primefaces.PrimeFaces;
 
 /**
@@ -32,7 +31,64 @@ public class RemesaController implements Serializable {
     private static final long serialVersionUID = 1L;
 
     @Inject
-    private EntityManager entityManager;
+    private ServicioRemesa servicioRemesa;
+    @Inject
+    private ServicioEmpresa servicioEmpresa;
+    @Inject
+    private SessionController session;
+    private Remesa remesa;
+    private Usuario usuario;
+    private List<Remesa> remesas;
+    private List<Remesa> remesasFiltradas;
+    private List<Empresa> empresas;
+    private Empresa empresa;
+
+    public Empresa getEmpresa() {
+        return empresa;
+    }
+
+    public void setEmpresa(Empresa empresa) {
+        this.empresa = empresa;
+    }
+
+    @PostConstruct
+    public void init() {
+        this.remesa = new Remesa();
+        this.usuario = session.getUsuario();
+        this.remesas = servicioRemesa.listar(usuario);
+        this.empresas = servicioEmpresa.listar();
+        this.empresa = new Empresa();
+    }
+
+   
+
+    public void creaRemesa() throws IOException {
+       
+        try {
+            this.remesa.setEstado("espera");
+            this.remesa.setUsuario(this.usuario);
+            this.remesa.setEmpresa(empresa);
+            servicioRemesa.crear(remesa);
+
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
+        } finally {
+            remesa = new Remesa();
+            System.out.println(usuario.getNombre());
+            remesas =servicioRemesa.listar(usuario);
+            System.out.println("Largo:"+remesas.size());
+            PrimeFaces.current().executeScript("PF('dlgRemesas').hide()");
+            this.bandera = false;
+        }
+    }
+
+    public ServicioRemesa getServicioRemesa() {
+        return servicioRemesa;
+    }
+
+    public void setServicioRemesa(ServicioRemesa servicioRemesa) {
+        this.servicioRemesa = servicioRemesa;
+    }
 
     public Usuario getUsuario() {
         return usuario;
@@ -58,23 +114,36 @@ public class RemesaController implements Serializable {
         this.session = session;
     }
 
-    private Usuario usuario;
-    private List<Remesa> remesas; 
-    
-
-    boolean bandera;
-    @Inject
-    private ServicioRemesa servicio;
-
-    @Inject
-    private SessionController session;
-
-    @PostConstruct
-    public void init() {
-        remesas = servicio.listar();
-
+    public List<Remesa> getRemesasFiltradas() {
+        return remesasFiltradas;
     }
 
+    public ServicioEmpresa getServicioEmpresa() {
+        return servicioEmpresa;
+    }
 
+    public void setServicioEmpresa(ServicioEmpresa servicioEmpresa) {
+        this.servicioEmpresa = servicioEmpresa;
+    }
 
+    public List<Empresa> getEmpresas() {
+        return empresas;
+    }
+
+    public void setEmpresas(List<Empresa> empresas) {
+        this.empresas = empresas;
+    }
+
+    public void setRemesasFiltradas(List<Remesa> remesasFiltradas) {
+        this.remesasFiltradas = remesasFiltradas;
+    }
+    boolean bandera;
+
+    public Remesa getRemesa() {
+        return remesa;
+    }
+
+    public void setRemesa(Remesa remesa) {
+        this.remesa = remesa;
+    }
 }

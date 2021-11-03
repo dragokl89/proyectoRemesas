@@ -17,7 +17,7 @@
 
     <h:body style="background-color: black">
         <div class="ui-fluid">
-            <h:form id="formAlbums">
+            <h:form id="formRemesas">
 
                 <p:growl id="messages" showSummary="true" showDetail="true"
                          skipDetailIfEqualsSummary="true"></p:growl>
@@ -26,7 +26,7 @@
 
                 <div class="p-grid sample-layout">
 
-                    
+
 
                     <div class="p-col-12 p-md-10 p-col-nogutter"
                          style="background-color: black">
@@ -35,20 +35,20 @@
                             <div class="p-col-10" style="margin: 0px auto">
 
                                 <div class="p-col-2">
-                                    <p:commandButton oncomplete="PF('dlgAlbums').show()"
+                                    <p:commandButton oncomplete="PF('dlgRemesas').show()"
                                                      value="Nueva Remesa"
-                                                     action="#{usuarioController.limpiarComponentes}"
-                                                     immediate="true" update="formAddUpdateAlbum:pblAlbums"></p:commandButton>
+
+                                                     immediate="true" update="formAddUpdateRemesa:pblRemesas"></p:commandButton>
                                 </div>
 
-                                <p:dataTable id="tblAlbums" widgetVar="tblAlbums" rows="20"
+                                <p:dataTable id="tblRemesas" widgetVar="tblRemesas" rows="20"
                                              paginator="true"
-                                             emptyMessage="No se encontraron registros de albums..."
+                                             emptyMessage="No se encontraron registros de remesas..."
                                              paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
                                              currentPageReportTemplate="{startRecord}-{endRecord} de {totalRecords} registros"
-                                             filteredValue="#{usuarioController.usuariosFiltrados}"
-                                             rowsPerPageTemplate="20,50,100" var="usuario"
-                                             value="#{usuarioController.usuarios}"
+                                             filteredValue="#{remesaController.remesasFiltradas}"
+                                             rowsPerPageTemplate="20,50,100" var="remesa"
+                                             value="#{remesaController.remesas}"
                                              paginatorPosition="bottom">
 
 
@@ -57,19 +57,19 @@
                                     </f:facet>
 
 
-                                    <p:column headerText="Empresa" filterBy="#{usuario.nombre}" filterMatchMode="contains">
-                                        <p:outputLabel value="#{usuario.nombre}"></p:outputLabel>
+                                    <p:column headerText="Empresa" filterBy="#{remesa.empresa.nombre}" filterMatchMode="contains">
+                                        <p:outputLabel value="#{remesa.empresa.nombre}"></p:outputLabel>
                                     </p:column>
 
                                     <p:column headerText="Valor" >
-                                        <p:outputLabel value="#{usuario.contrasena}"></p:outputLabel>
-                                    </p:column>
-                                    
-                                    <p:column headerText="Estado" >
-                                        <p:outputLabel value="#{usuario.estado}"></p:outputLabel>
+                                        <p:outputLabel value="#{remesa.valor}"></p:outputLabel>
                                     </p:column>
 
-                                    
+                                    <p:column headerText="Estado" >
+                                        <p:outputLabel value="#{remesa.estado}"></p:outputLabel>
+                                    </p:column>
+
+
                                 </p:dataTable>
 
                             </div>
@@ -82,30 +82,35 @@
 
             </h:form>
 
-            <p:dialog id="dlgAlbum" header="Enviar o recibir nueva remesa"
-                      widgetVar="dlgAlbums" modal="true" responsive="true"
+            <p:dialog id="dlgRemesa" header="Enviar o recibir nueva remesa"
+                      widgetVar="dlgRemesas" modal="true" responsive="true"
                       resizable="false" width="50%" height="500">
 
-                <h:form id="formAddUpdateAlbum">
+                <h:form id="formAddUpdateRemesa">
 
 
-                    <p:panelGrid id="pblAlbums" columns="1" layout="grid"
+                    <p:panelGrid id="pblRemesas" columns="1" layout="grid"
                                  styleClass="ui-panelgrid-blank" columnClasses="ui-g-12">
 
-                        <p:outputLabel id="lblEmpresa" value="Empresa: " for="txtEmpresa"></p:outputLabel>
-                        <p:inputText id="txtEmpresa" required="true"
-                                     requiredMessage="La empresa es requerida"
-                                     value="#{usuarioController.usuario.nombre}"></p:inputText>
+                        <p:outputLabel id="lblEmpresa" value="Empresa: " for="cboEmpresa"></p:outputLabel>
+                        <p:selectOneMenu id="cboEmpresa" required="true" panelStyleClass="hideDisabled"
+                                         requiredMessage="La empresa es requerida" 
+                                         value="#{remesaController.empresa.idempresa}" >
+                            <f:selectItem itemValue="" itemLabel="Seleccione"></f:selectItem>
+                            <f:selectItems var="empresa"
+                                           value="#{remesaController.empresas}"
+                                           itemValue="#{empresa.idempresa}" itemLabel="#{empresa.nombre}" ></f:selectItems>
+                        </p:selectOneMenu>
 
                         <p:outputLabel id="lblValor" value="Valor: " for="txtValor"></p:outputLabel>
                         <p:inputText id="txtValor" required="true"
                                      requiredMessage="El valor es requerido"
-                                     value="#{usuarioController.usuario.contrasena}"></p:inputText>
-                        
+                                     value="#{remesaController.remesa.valor}"></p:inputText>
+
                         <p:outputLabel id="lblTipo" value="Tipo: " for="txtTipo"></p:outputLabel>
                         <p:selectOneMenu id="txtTipo" required="true"
-                                         requiredMessage="El rol es requerido"
-                                         value="#{usuarioController.usuario.rol}">
+                                         requiredMessage="El tipo es requerido"
+                                         value="#{remesaController.remesa.tipo}">
                             <f:selectItem itemLabel="Seleccionar" itemValue=""/>
                             <f:selectItem itemLabel="Envío" itemValue="enviar"/>
                             <f:selectItem itemLabel="Recepción" itemValue="recibir"/>
@@ -116,12 +121,12 @@
                     <p:panelGrid columns="2" layout="grid"
                                  styleClass="ui-panelgrid-blank" columnClasses="ui-g-6, ui-g-6">
                         <p:commandButton value="Guardar"  
-                                         update="formAlbums:messages, formAddUpdateAlbum:pblAlbums, formAlbums:tblAlbums"
-                                         action="#{usuarioController.crearUsuario}"></p:commandButton>
+                                         update="formRemesas:messages, formAddUpdateRemesa:pblRemesas, formRemesas:tblRemesas"
+                                         action="#{remesaController.creaRemesa}"></p:commandButton>
 
 
                         <p:commandButton immediate="true" type="button" value="Cancelar"
-                                         style="background-color: red" onclick="PF('dlgAlbums').hide()"></p:commandButton>
+                                         style="background-color: red" onclick="PF('dlgRemesas').hide()"></p:commandButton>
                     </p:panelGrid>
 
                 </h:form>
