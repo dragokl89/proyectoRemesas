@@ -24,7 +24,7 @@ public class ImagenBuscador extends HttpServlet{
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-       int id= Integer.parseInt(req.getParameter("id"));
+        int id= Integer.parseInt(req.getParameter("id"));
         Agente agentbyId = agentService.buscarAgente(id);
         System.out.println(agentbyId.getNombre());
         resp.getOutputStream().write(agentbyId.getFotografia());

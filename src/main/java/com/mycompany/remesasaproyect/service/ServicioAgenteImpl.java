@@ -79,8 +79,7 @@ public class ServicioAgenteImpl implements ServicioAgente {
 
     @Override
     public Agente buscarAgente(int i) {
-       int gender = i;
-        return em.createQuery("select E from Agente E WHERE E.idagente = :usr",Agente.class).setParameter("usr", i).getSingleResult();
+        return em.find(Agente.class, i);
     }
     
 }

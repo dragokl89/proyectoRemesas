@@ -57,7 +57,7 @@
                                     </f:facet>
 
                                     <p:column headerText="Imagen">
-                                        <p:graphicImage value="/dameImagenAngete?id=#{agente.idagente}" 
+                                        <p:graphicImage url="/dameImagenAngete?id=#{agente.idagente}" 
                                                         width="100%"></p:graphicImage>
                                     </p:column>
 
@@ -118,7 +118,7 @@
 
                         <p:outputLabel id="lblImagen" value="Imagen: "></p:outputLabel>
                         <p:fileUpload listener="#{agenteController.handleFileUpload}"
-                                      mode="advanced" dragDropSupport="true" auto="true"
+                                      mode="advanced" dragDropSupport="true" auto="true" 
                                       sizeLimit="100000" label="Buscar..." update="opTextImage"
                                       immediate="true" />
 

@@ -101,11 +101,14 @@ public class AgenteController implements Serializable {
                 if (!bandera) {
                     agente.setEstado(true);
                 }
-                this.agente.setFotografia(this.uploadedFile.getContent());
+                if(this.uploadedFile.getContent()!=null){
+                         this.agente.setFotografia(this.uploadedFile.getContent());
+                }
+      
                 servicio.crear(this.agente);
             } else {
                 FacesContext.getCurrentInstance().addMessage("registryForm",
-                        new FacesMessage(FacesMessage.SEVERITY_ERROR, "El camion ya existe", ""));
+                        new FacesMessage(FacesMessage.SEVERITY_ERROR, "El agente ya existe", ""));
             }
 
         } catch (Exception e) {
@@ -113,6 +116,7 @@ public class AgenteController implements Serializable {
         } finally {
             agente = new Agente();
             agentes = servicio.listar();
+            this.bandera=false;
             PrimeFaces.current().executeScript("PF('dlgAgentes').hide()");
         }
     }
