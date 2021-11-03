@@ -6,9 +6,11 @@ package com.mycompany.remesasaproyect.service;
 
 import com.mycompany.remesasaproyect.model.Agente;
 import com.mycompany.remesasaproyect.model.Agente;
+import com.mycompany.remesasaproyect.model.Remesa;
 import com.mycompany.remesasaproyect.model.Usuario;
 import java.util.List;
 import javax.enterprise.context.ApplicationScoped;
+import javax.inject.Inject;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
@@ -20,7 +22,8 @@ import javax.persistence.Persistence;
 @ApplicationScoped
 public class ServicioAgenteImpl implements ServicioAgente {
  private static final EntityManagerFactory emf = Persistence.createEntityManagerFactory("my_persistence_unit");
-     
+      @Inject
+    EntityManager em;
     @SuppressWarnings("unchecked")
     @Override
     public List<Agente> listar() {
@@ -72,6 +75,12 @@ public class ServicioAgenteImpl implements ServicioAgente {
         em.getTransaction().begin();
         em.remove(em.find(Agente.class, id));
         em.getTransaction().commit();
+    }
+
+    @Override
+    public Agente buscarAgente(int i) {
+       int gender = i;
+        return em.createQuery("select E from Agente E WHERE E.idagente = :usr",Agente.class).setParameter("usr", i).getSingleResult();
     }
     
 }

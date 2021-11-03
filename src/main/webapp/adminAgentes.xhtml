@@ -53,9 +53,13 @@
 
 
                                     <f:facet name="header">
-                                        Listado de Albums
+                                        Listado de Agentes
                                     </f:facet>
 
+                                    <p:column headerText="Imagen">
+                                        <p:graphicImage value="/dameImagenAngete?id=#{agente.idagente}" 
+                                                        width="100%"></p:graphicImage>
+                                    </p:column>
 
                                     <p:column headerText="Cedula" 
                                               filterMatchMode="contains" filterBy="#{agente.cedula}">
@@ -111,6 +115,18 @@
                         <p:inputText id="txtCedula" required="true"
                                      requiredMessage="La cedula es requerida"
                                      value="#{agenteController.agente.cedula}"></p:inputText>
+
+                        <p:outputLabel id="lblImagen" value="Imagen: "></p:outputLabel>
+                        <p:fileUpload listener="#{agenteController.handleFileUpload}"
+                                      mode="advanced" dragDropSupport="true" auto="true"
+                                      sizeLimit="100000" label="Buscar..." update="opTextImage"
+                                      immediate="true" />
+
+                        <p:outputPanel id="opTextImage">
+                            <p:outputLabel id="lblTextImage"
+                                           value="Se ha cargado la imagen"
+                                           rendered="#{agenteController.uploadedFile != null}"></p:outputLabel>
+                        </p:outputPanel>               
 
                         <p:outputLabel id="lblNombre" value="Nombre: " for="txtNombre"></p:outputLabel>
                         <p:inputText id="txtNombre" required="true"

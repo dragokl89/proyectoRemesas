@@ -25,4 +25,5 @@ com\mycompany\remesasaproyect\service\ServicioUsuarioImpl.class
 com\mycompany\remesasaproyect\controller\SessionController.class
 com\mycompany\remesasaproyect\model\Agente.class
 com\mycompany\remesasaproyect\service\ServicioViajeImpl.class
+com\mycompany\remesasaproyect\controller\ImagenBuscador.class
 com\mycompany\remesasaproyect\service\ServicioRemesaImpl.class

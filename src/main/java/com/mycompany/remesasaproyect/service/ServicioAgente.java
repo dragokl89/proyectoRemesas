@@ -20,4 +20,6 @@ public interface ServicioAgente {
 	Agente actualizar(Agente agente);
 
 	void eliminar(int id);
+        
+        Agente buscarAgente(int id);
 }

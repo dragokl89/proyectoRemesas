@@ -7,6 +7,7 @@ package com.mycompany.remesasaproyect.controller;
 import com.mycompany.remesasaproyect.model.Agente;
 import com.mycompany.remesasaproyect.service.ServicioAgente;
 import java.io.IOException;
+import java.io.InputStream;
 import java.io.Serializable;
 import java.util.List;
 import javax.annotation.PostConstruct;
@@ -16,6 +17,8 @@ import javax.inject.Inject;
 import javax.inject.Named;
 import javax.persistence.EntityManager;
 import org.primefaces.PrimeFaces;
+import org.primefaces.event.FileUploadEvent;
+import org.primefaces.model.file.UploadedFile;
 
 /**
  *
@@ -28,6 +31,16 @@ public class AgenteController implements Serializable {
     private static final long serialVersionUID = 1L;
     private List<Agente> agentes;
     private List<Agente> agentesFiltrados;
+    private UploadedFile uploadedFile;
+    private InputStream inputStream;
+
+    public UploadedFile getUploadedFile() {
+        return uploadedFile;
+    }
+
+    public void setUploadedFile(UploadedFile uploadedFile) {
+        this.uploadedFile = uploadedFile;
+    }
 
     public List<Agente> getAgentesFiltrados() {
         return agentesFiltrados;
@@ -62,19 +75,33 @@ public class AgenteController implements Serializable {
             e.printStackTrace();
         }
     }
-    
-     public void cargarAgente(Agente agente) {
-      
+
+    public void cargarAgente(Agente agente) {
+
         this.agente = agente;
         this.bandera = true;
     }
-    
+
+    public void handleFileUpload(FileUploadEvent fileUploadEvent) {
+
+        //:Se guarda el file en esta variable
+        this.uploadedFile = fileUploadEvent.getFile();
+
+        try {
+            this.inputStream = fileUploadEvent.getFile().getInputStream();
+        } catch (IOException e) {
+            
+            e.printStackTrace();
+        }
+    }
+
     public void crearAgente() {
         try {
-            if (!existeAgente()|| bandera) {
+            if (!existeAgente() || bandera) {
                 if (!bandera) {
                     agente.setEstado(true);
                 }
+                this.agente.setFotografia(this.uploadedFile.getContent());
                 servicio.crear(this.agente);
             } else {
                 FacesContext.getCurrentInstance().addMessage("registryForm",
