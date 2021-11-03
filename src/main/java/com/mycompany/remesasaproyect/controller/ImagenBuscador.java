@@ -27,6 +27,7 @@ public class ImagenBuscador extends HttpServlet{
         int id= Integer.parseInt(req.getParameter("id"));
         Agente agentbyId = agentService.buscarAgente(id);
         System.out.println(agentbyId.getNombre());
+        resp.resetBuffer();
         resp.getOutputStream().write(agentbyId.getFotografia());
         resp.getOutputStream().close();
     }

@@ -33,7 +33,7 @@ public class AgenteController implements Serializable {
     private List<Agente> agentesFiltrados;
     private UploadedFile uploadedFile;
     private InputStream inputStream;
-
+    private boolean bandera2 ;
     public UploadedFile getUploadedFile() {
         return uploadedFile;
     }
@@ -65,6 +65,8 @@ public class AgenteController implements Serializable {
         agentes = servicio.listar();
         Agente camion = entityManager.find(Agente.class, 1);
         this.agente = new Agente();
+        bandera2=false;
+        
     }
 
     public void rediccionar(String pagina) {
@@ -85,10 +87,11 @@ public class AgenteController implements Serializable {
     public void handleFileUpload(FileUploadEvent fileUploadEvent) {
 
         //:Se guarda el file en esta variable
+        this.bandera2=true;
         this.uploadedFile = fileUploadEvent.getFile();
 
         try {
-            this.inputStream = fileUploadEvent.getFile().getInputStream();
+          this.inputStream = fileUploadEvent.getFile().getInputStream();
         } catch (IOException e) {
             
             e.printStackTrace();
@@ -101,8 +104,9 @@ public class AgenteController implements Serializable {
                 if (!bandera) {
                     agente.setEstado(true);
                 }
-                if(this.uploadedFile.getContent()!=null){
+                if(bandera2){
                          this.agente.setFotografia(this.uploadedFile.getContent());
+                         this.bandera2=false;
                 }
       
                 servicio.crear(this.agente);
