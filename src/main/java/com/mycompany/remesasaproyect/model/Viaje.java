@@ -4,6 +4,7 @@
  */
 package com.mycompany.remesasaproyect.model;
 
+import java.util.Date;
 import java.time.LocalDateTime;
 import java.util.List;
 import javax.persistence.Column;
@@ -39,7 +40,17 @@ public class Viaje {
     private Camion camion;
 
     @Column(name = "fecha")
-    private LocalDateTime fecha;
+    private Date fecha;
+
+    public Date getFecha() {
+        return fecha;
+    }
+
+    public void setFecha(Date fecha) {
+        this.fecha = fecha;
+    }
+
+  
 
     public int getIdviaje() {
         return idviaje;

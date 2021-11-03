@@ -19,6 +19,7 @@ com\mycompany\remesasaproyect\model\Empresa.class
 com\mycompany\remesasaproyect\service\ServicioAgente.class
 com\mycompany\remesasaproyect\controller\Test.class
 com\mycompany\remesasaproyect\controller\ViajeController.class
+com\mycompany\remesasaproyect\controller\DetalleController.class
 com\mycompany\remesasaproyect\model\Viaje.class
 com\mycompany\remesasaproyect\service\ServicioUsuarioImpl.class
 com\mycompany\remesasaproyect\controller\SessionController.class

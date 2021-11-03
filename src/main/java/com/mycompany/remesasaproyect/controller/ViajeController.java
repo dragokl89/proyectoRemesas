@@ -15,6 +15,7 @@ import com.mycompany.remesasaproyect.service.ServicioCamion;
 import com.mycompany.remesasaproyect.service.ServicioRemesa;
 import com.mycompany.remesasaproyect.service.ServicioViaje;
 import java.io.Serializable;
+import java.util.Date;
 import java.util.List;
 import javax.annotation.PostConstruct;
 import javax.faces.application.FacesMessage;
@@ -59,7 +60,15 @@ public class ViajeController implements Serializable {
     private Agente piloto;
     private Agente escolta;
     private Camion camion;
+    private Date fecha;
 
+    public Date getFecha() {
+        return fecha;
+    }
+
+    public void setFecha(Date fecha) {
+        this.fecha = fecha;
+    }
     @PostConstruct
     public void init() {
         this.remesas = servicioRemesa.listar();
@@ -76,6 +85,7 @@ public class ViajeController implements Serializable {
 
     public void aprobarRemesa() {
         try {
+            
             this.viaje.setCamion(camion);
             servicioViaje.agregarViaje(this.viaje);
 

@@ -19,8 +19,16 @@ public class SessionController implements Serializable {
 
     private static final long serialVersionUID = 1L;
     private Usuario usuario;
+    private Remesa remesa;
 
- 
+    public Remesa getRemesa() {
+        return remesa;
+    }
+
+    public void setRemesa(Remesa remesa) {
+        this.remesa = remesa;
+    }
+
     @PostConstruct
     public void init() {
         System.out.println("***********************************");
@@ -34,5 +42,5 @@ public class SessionController implements Serializable {
     public void setUsuario(Usuario usuario) {
         this.usuario = usuario;
     }
-    
+
 }

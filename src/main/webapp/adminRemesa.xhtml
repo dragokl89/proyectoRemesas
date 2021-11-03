@@ -104,6 +104,10 @@
                     <p:panelGrid id="pblRemesas" columns="1" layout="grid"
                                  styleClass="ui-panelgrid-blank" columnClasses="ui-g-12">
 
+                        <p:outputLabel value="Fecha"/>
+                        <p:calendar value="#{viajeController.viaje.fecha}"></p:calendar>
+
+
                         <p:outputLabel id="lblCamion" value="Camion: " for="cboCamion"></p:outputLabel>
                         <p:selectOneMenu id="cboCamion" required="true" panelStyleClass="hideDisabled"
                                          requiredMessage="El Camión es requerido" 
