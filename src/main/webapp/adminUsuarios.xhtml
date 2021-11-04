@@ -8,14 +8,11 @@
     <h:head>
         <ui:include src="scripts.xhtml"></ui:include>
 
-        <style>
-            body .ui-panelgrid .ui-panelgrid-cell {
-                background-color: white
-            }
-        </style>
     </h:head>
 
-    <h:body style="background-color: black">
+    <h:body style="background-color: #333">
+
+
         <div class="ui-fluid">
             <h:form id="formAlbums">
 
@@ -29,14 +26,16 @@
                     <ui:include src="header.xhtml"></ui:include>
 
                     <div class="p-col-12 p-md-10 p-col-nogutter"
-                         style="background-color: black">
+                         style="background-color: #333">
                         <div class="p-grid">
 
                             <div class="p-col-10" style="margin: 0px auto">
 
                                 <div class="p-col-2">
-                                    <p:commandButton oncomplete="PF('dlgAlbums').show()"
-                                                     value="Agregar"
+                                    <p:commandButton class="botontbl"
+                                        oncomplete="PF('dlgAlbums').show()"
+                                                     icon="pi pi-user-plus"
+                                                     value="Agregar usuario"
                                                      action="#{usuarioController.limpiarComponentes}"
                                                      immediate="true" update="formAddUpdateAlbum:pblAlbums"></p:commandButton>
                                 </div>
@@ -53,7 +52,7 @@
 
 
                                     <f:facet name="header">
-                                        Listado de Albums
+                                        Listado de Usuarios
                                     </f:facet>
 
 
@@ -71,7 +70,7 @@
 
                                     <p:column headerText="Actualizar">
                                         <p:commandButton icon="pi pi-pencil"
-                                                         style="background-color: green" immediate="true"
+                                                         style="background-color: green; border:1px solid green" immediate="true"
                                                          action="#{usuarioController.cargarUsuario(usuario)}"
                                                          oncomplete="PF('dlgAlbums').show()"
                                                          update="formAddUpdateAlbum:pblAlbums"></p:commandButton>

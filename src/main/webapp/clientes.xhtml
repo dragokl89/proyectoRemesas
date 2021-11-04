@@ -9,13 +9,15 @@
         <ui:include src="scripts.xhtml"></ui:include>
 
         <style>
+
+            
             body .ui-panelgrid .ui-panelgrid-cell {
                 background-color: white
             }
         </style>
     </h:head>
 
-    <h:body style="background-color: black">
+    <h:body>
         <div class="ui-fluid">
             <h:form id="formRemesas">
 
@@ -69,9 +71,9 @@
                                         <p:outputLabel value="#{remesa.estado}"></p:outputLabel>
                                     </p:column>
 
-                                    <p:column headerText="Actualizar">
-                                        <p:commandButton icon="pi pi-pencil"
-                                                         style="background-color: green" immediate="true"
+                                    <p:column headerText="Detalles">
+                                        <p:commandButton icon="pi pi-search"
+                                                         style="background-color: #aae3ff " immediate="true"
                                                          action="#{remesaController.cargarRemesa(remesa)}"
                                                          oncomplete="PF('dlgDetalles').show()"
                                                          update="formAddUpdateDetalle:pblDetalles"></p:commandButton>
@@ -152,7 +154,7 @@
 
 
 
-            <p:dialog id="dlgDetalle" header="Enviar o recibir nueva remesa"
+            <p:dialog id="dlgDetalle" header="Detalles del envío de remesa"
                       widgetVar="dlgDetalles" modal="true" responsive="true"
                       resizable="false" width="50%" height="500">
 
@@ -166,20 +168,20 @@
                         <h:outputText id="cedC" value="#{remesaController.conductor.cedula}"></h:outputText>
 
                         <p:outputLabel id="nombreC" value="Nombre del Conductor: " for="nomC"></p:outputLabel>
-                        <h:outputText id="nomC" value="#{remesaController.conductor.nombre} + #{remesaController.conductor.apellido}"></h:outputText>
+                        <h:outputText id="nomC" value="#{remesaController.conductor.nombre} #{remesaController.conductor.apellido}"></h:outputText>
 
                         <p:outputLabel id="fotoC" value="Fotografía Conductor: " for="imgC"></p:outputLabel>
-                        <p:graphicImage id="imgC" url="/dameImagenAngete?id=#{remesaController.conductor.idagente}" 
+                        <p:graphicImage id="imgC" value="/dameImagenAngete?id=#{remesaController.conductor.idagente}" 
                                         width="100%"></p:graphicImage>
 
                         <p:outputLabel id="cedulaE" value="Identificación del Escolta: " for="cedE"></p:outputLabel>
                         <h:outputText id="cedE" value="#{remesaController.escolta.cedula}"></h:outputText>
 
                         <p:outputLabel id="nombreE" value="Nombre del Escolta: " for="nomE"></p:outputLabel>
-                        <h:outputText id="nomE" value="#{remesaController.escolta.nombre} + #{remesaController.escolta.apellido}"></h:outputText>
+                        <h:outputText id="nomE" value="#{remesaController.escolta.nombre} #{remesaController.escolta.apellido}"></h:outputText>
 
                         <p:outputLabel id="fotoE" value="Fotografía Escolta: " for="imgE"></p:outputLabel>
-                        <p:graphicImage id="imgE" url="/dameImagenAngete?id=#{remesaController.escolta.idagente}" 
+                        <p:graphicImage id="imgE" value="/dameImagenAngete?id=#{remesaController.escolta.idagente}" 
                                         width="100%"></p:graphicImage>
 
                         <p:outputLabel id="placa" value="Placa Camión: " for="placCam"></p:outputLabel>
@@ -207,8 +209,8 @@
                     <p:panelGrid columns="2" layout="grid"
                                  styleClass="ui-panelgrid-blank" columnClasses="ui-g-6, ui-g-6">
 
-                        <p:commandButton immediate="true" type="button" value="Cancelar"
-                                         style="background-color: red" onclick="PF('dlgDetalles').hide()"></p:commandButton>
+                        <p:commandButton immediate="true" type="button" value="Cerrar"
+                                         style="background-color: #ff1c00" onclick="PF('dlgDetalles').hide()"></p:commandButton>
                     </p:panelGrid>
 
                 </h:form>
