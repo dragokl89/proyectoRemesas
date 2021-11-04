@@ -9,16 +9,14 @@
         <ui:include src="scripts.xhtml"></ui:include>
 
         <style>
-            body .ui-panelgrid .ui-panelgrid-cell {
-                background-color: white
-            }
+            
             .ui-selectonemenu-panel.hideDisabled .ui-selectonemenu-item.ui-state-disabled {
                 display: none;
             }
         </style>
     </h:head>
 
-    <h:body style="background-color: black">
+    <h:body>
         <div class="ui-fluid">
             <h:form id="formRemesas">
 
@@ -32,7 +30,7 @@
                     <ui:include src="header.xhtml"></ui:include>
 
                     <div class="p-col-12 p-md-10 p-col-nogutter"
-                         style="background-color: black">
+                         style="background-color: #333">
                         <div class="p-grid">
 
                             <div class="p-col-10" style="margin: 0px auto">
@@ -78,7 +76,7 @@
                                     <p:column headerText="Administrar">
 
                                         <p:commandButton icon="pi pi-pencil"
-                                                         style="background-color: green" immediate="true"
+                                                         style="background-color: green; border: green; border-radius: 5px " immediate="true"
                                                          action="#{viajeController.cargarRemesa(remesa)}"
                                                          oncomplete="PF('dlgRemesas').show()"
                                                          update="formAddUpdateRemesa:pblRemesas"></p:commandButton>
@@ -145,15 +143,17 @@
                                  styleClass="ui-panelgrid-blank" columnClasses="ui-g-6, ui-g-6">
                         <p:commandButton value="Aprobar"  
                                          update="formRemesas:messages, formAddUpdateRemesa:pblRemesas, formRemesas:tblRemesas"
-                                         action="#{viajeController.aprobarRemesa}"></p:commandButton>
+                                         action="#{viajeController.aprobarRemesa}"
+                                         style="width: 100%"></p:commandButton>
 
                         <p:commandButton value="Rechazar"
-                                         style="background-color: red" immediate="true"
+                                         style="background-color: #b50000  ; width: 100%" immediate="true"
                                          update="formRemesas:messages, formAddUpdateRemesa:pblRemesas, formRemesas:tblRemesas"
-                                         action="#{viajeController.rechazarRemesa()}" ></p:commandButton>           
+                                         action="#{viajeController.rechazarRemesa()}" 
+                                         ></p:commandButton>           
 
                         <p:commandButton immediate="true" type="button" value="Cancelar"
-                                         style="background-color: gray" onclick="PF('dlgRemesas').hide()"></p:commandButton>
+                                         style="background-color: gray; width: 100%" onclick="PF('dlgRemesas').hide()" ></p:commandButton>
                     </p:panelGrid>
                 </h:form>
             </p:dialog>

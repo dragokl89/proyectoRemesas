@@ -8,14 +8,9 @@
     <h:head>
         <ui:include src="scripts.xhtml"></ui:include>
 
-        <style>
-            body .ui-panelgrid .ui-panelgrid-cell {
-                background-color: white
-            }
-        </style>
     </h:head>
 
-    <h:body style="background-color: black">
+    <h:body>
         <div class="ui-fluid">
             <h:form id="formAgentes">
 
@@ -29,7 +24,7 @@
                     <ui:include src="header.xhtml"></ui:include>
 
                     <div class="p-col-12 p-md-10 p-col-nogutter"
-                         style="background-color: black">
+                         style="background-color: #333">
                         <div class="p-grid">
 
                             <div class="p-col-10" style="margin: 0px auto">
@@ -82,9 +77,9 @@
                                         <p:outputLabel value="#{agente.estado}"></p:outputLabel>
                                     </p:column>
 
-                                    <p:column headerText="Actualizar">
+                                    <p:column headerText="Editar">
                                         <p:commandButton icon="pi pi-pencil"
-                                                         style="background-color: green" immediate="true"
+                                                         style="background-color: green; border-color: green; border-radius: 5px" immediate="true"
                                                          action="#{agenteController.cargarAgente(agente)}"
                                                          oncomplete="PF('dlgAgentes').show()"
                                                          update="formAddUpdateAgente:pblAgentes"></p:commandButton>
@@ -101,6 +96,7 @@
 
             </h:form>
 
+
             <p:dialog id="dlgAgente" header="Agregar o actualizar album"
                       widgetVar="dlgAgentes" modal="true" responsive="true"
                       resizable="false" width="50%" height="500">
@@ -114,13 +110,17 @@
                         <p:outputLabel id="lblCedula" value="Cedula: " for="txtCedula"></p:outputLabel>
                         <p:inputText id="txtCedula" required="true"
                                      requiredMessage="La cedula es requerida"
-                                     value="#{agenteController.agente.cedula}"></p:inputText>
+                                     value="#{agenteController.agente.cedula}">
+                        <f:validateLength minimum="10" maximum="10"/>
+                        <f:validateLongRange minimum="1"/>
+                        </p:inputText>
 
                         <p:outputLabel id="lblImagen" value="Imagen: "></p:outputLabel>
                         <p:fileUpload listener="#{agenteController.handleFileUpload}"
                                       mode="advanced" dragDropSupport="true" auto="true" 
-                                      sizeLimit="100000" label="Buscar..." update="opTextImage"
-                                      immediate="true" />
+                                      sizeLimit="100000" label="Examinar" update="opTextImage"
+                                      immediate="true" 
+                                      style=""/>
 
                         <p:outputPanel id="opTextImage">
                             <p:outputLabel id="lblTextImage"
@@ -157,9 +157,10 @@
                                  styleClass="ui-panelgrid-blank" columnClasses="ui-g-6, ui-g-6">
                         <p:commandButton value="Guardar"
                                          update="formAgentes:messages, formAddUpdateAgente:pblAgentes, formAgentes:tblAgentes"
-                                         action="#{agenteController.crearAgente()}"></p:commandButton>
+                                         action="#{agenteController.crearAgente()}"
+                                         style="width: 100%"></p:commandButton>
                         <p:commandButton type="button" value="Cancelar"
-                                         style="background-color: red" onclick="PF('dlgAgentes').hide()"></p:commandButton>
+                                         style="background-color: #b50000  ; width: 100%" onclick="PF('dlgAgentes').hide()"></p:commandButton>
                     </p:panelGrid>
 
                 </h:form>

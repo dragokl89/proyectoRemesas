@@ -116,11 +116,12 @@
                                  styleClass="ui-panelgrid-blank" columnClasses="ui-g-6, ui-g-6">
                         <p:commandButton value="Guardar"  
                                          update="formAlbums:messages, formAddUpdateAlbum:pblAlbums, formAlbums:tblAlbums"
-                                         action="#{usuarioController.crearUsuario}"></p:commandButton>
+                                         action="#{usuarioController.crearUsuario}"
+                                         style="width: 100%"></p:commandButton>
 
 
                         <p:commandButton immediate="true" type="button" value="Cancelar"
-                                         style="background-color: red" onclick="PF('dlgAlbums').hide()"></p:commandButton>
+                                         style="background-color: #b50000  ; width: 100%" onclick="PF('dlgAlbums').hide()"></p:commandButton>
                     </p:panelGrid>
 
                 </h:form>

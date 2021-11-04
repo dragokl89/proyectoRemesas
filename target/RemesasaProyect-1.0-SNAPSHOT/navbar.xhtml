@@ -1,22 +1,23 @@
 
 <ui:composition xmlns="http://www.w3.org/1999/xhtml"
-	xmlns:f="http://java.sun.com/jsf/core"
-	xmlns:h="http://java.sun.com/jsf/html"
-	xmlns:p="http://primefaces.org/ui"
-	xmlns:ui="http://java.sun.com/jsf/facelets"
-	>
+                xmlns:f="http://java.sun.com/jsf/core"
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:p="http://primefaces.org/ui"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                >
 
 
-	<p:menubar id="menubar" style="background-color: #333">
-		<f:facet name="options">
-			
-			<p:commandButton id="btnCerrarSesion" icon="pi pi-sign-out"
-                                         
-                                         action="#{usuarioController.rediccionar('login.xhtml')}"	 immediate="true"></p:commandButton>
-		</f:facet>
-	</p:menubar>
-	<!-- Hace que la barra de menu se mantenga fija -->
-	<p:sticky target="menubar"></p:sticky>
+    <p:menubar id="menubar" style="background-color: #333">
+        <f:facet name="options">
+
+            <p:commandButton id="btnCerrarSesion" icon="pi pi-sign-out"
+
+
+                             action="#{usuarioController.rediccionar('login.xhtml')}"	 immediate="true"></p:commandButton>
+        </f:facet>
+    </p:menubar>
+    <!-- Hace que la barra de menu se mantenga fija -->
+    <p:sticky target="menubar"></p:sticky>
 
 
 </ui:composition>

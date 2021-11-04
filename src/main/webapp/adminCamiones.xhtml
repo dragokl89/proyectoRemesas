@@ -8,14 +8,9 @@
     <h:head>
         <ui:include src="scripts.xhtml"></ui:include>
 
-        <style>
-            body .ui-panelgrid .ui-panelgrid-cell {
-                background-color: white
-            }
-        </style>
     </h:head>
 
-    <h:body style="background-color: black">
+    <h:body>
         <div class="ui-fluid">
             <h:form id="formCamiones">
 
@@ -29,7 +24,7 @@
                     <ui:include src="header.xhtml"></ui:include>
 
                     <div class="p-col-12 p-md-10 p-col-nogutter"
-                         style="background-color: black">
+                         style="background-color: #333">
                         <div class="p-grid">
 
                             <div class="p-col-10" style="margin: 0px auto">
@@ -84,7 +79,7 @@
 
                                     <p:column headerText="Actualizar">
                                         <p:commandButton icon="pi pi-pencil"
-                                                         style="background-color: green" immediate="true"
+                                                         style="background-color: green; border: green; border-radius: 5px" immediate="true"
                                                          action="#{camionController.cargarCamion(camion)}"
                                                          oncomplete="PF('dlgCamiones').show()"
                                                          update="formAddUpdateCamion:pblCamiones"></p:commandButton>
@@ -101,7 +96,7 @@
 
             </h:form>
 
-            <p:dialog id="dlgCamion" header="Agregar o actualizar album"
+            <p:dialog id="dlgCamion" header="Agregar/editar camión"
                       widgetVar="dlgCamiones" modal="true" responsive="true"
                       resizable="false" width="50%" height="500">
 
@@ -154,9 +149,10 @@
                                  styleClass="ui-panelgrid-blank" columnClasses="ui-g-6, ui-g-6">
                         <p:commandButton value="Guardar"
                                          update="formCamiones:messages, formAddUpdateCamion:pblCamiones, formCamiones:tblCamiones"
-                                         action="#{camionController.crearCamion()}"></p:commandButton>
+                                         action="#{camionController.crearCamion()}"
+                                         style="width: 100%"></p:commandButton>
                         <p:commandButton type="button" value="Cancelar"
-                                         style="background-color: red" onclick="PF('dlgCamiones').hide()"></p:commandButton>
+                                         style="background-color:#b50000  ; width: 100%" onclick="PF('dlgCamiones').hide()"></p:commandButton>
                     </p:panelGrid>
 
                 </h:form>
