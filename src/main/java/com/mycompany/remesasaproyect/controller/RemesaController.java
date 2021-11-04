@@ -4,9 +4,12 @@
  */
 package com.mycompany.remesasaproyect.controller;
 
+import com.mycompany.remesasaproyect.model.Agente;
+import com.mycompany.remesasaproyect.model.Camion;
 import com.mycompany.remesasaproyect.model.Empresa;
 import com.mycompany.remesasaproyect.model.Remesa;
 import com.mycompany.remesasaproyect.model.Usuario;
+import com.mycompany.remesasaproyect.model.Viaje;
 import com.mycompany.remesasaproyect.service.ServicioEmpresa;
 import com.mycompany.remesasaproyect.service.ServicioRemesa;
 import java.io.IOException;
@@ -43,6 +46,43 @@ public class RemesaController implements Serializable {
     private List<Empresa> empresas;
     private Empresa empresa;
 
+    public Agente getConductor() {
+        return conductor;
+    }
+
+    public void setConductor(Agente conductor) {
+        this.conductor = conductor;
+    }
+
+    public Agente getEscolta() {
+        return escolta;
+    }
+
+    public void setEscolta(Agente escolta) {
+        this.escolta = escolta;
+    }
+
+    public Camion getCamion() {
+        return camion;
+    }
+
+    public void setCamion(Camion camion) {
+        this.camion = camion;
+    }
+
+    public Viaje getViaje() {
+        return viaje;
+    }
+
+    public void setViaje(Viaje viaje) {
+        this.viaje = viaje;
+    }
+
+    private Agente conductor;
+    private Agente escolta;
+    private Camion camion;
+    private Viaje viaje;
+
     public Empresa getEmpresa() {
         return empresa;
     }
@@ -60,10 +100,8 @@ public class RemesaController implements Serializable {
         this.empresa = new Empresa();
     }
 
-   
-
     public void creaRemesa() throws IOException {
-       
+
         try {
             this.remesa.setEstado("espera");
             this.remesa.setUsuario(this.usuario);
@@ -75,8 +113,8 @@ public class RemesaController implements Serializable {
         } finally {
             remesa = new Remesa();
             System.out.println(usuario.getNombre());
-            remesas =servicioRemesa.listar(usuario);
-            System.out.println("Largo:"+remesas.size());
+            remesas = servicioRemesa.listar(usuario);
+            System.out.println("Largo:" + remesas.size());
             PrimeFaces.current().executeScript("PF('dlgRemesas').hide()");
             this.bandera = false;
         }
@@ -146,4 +184,18 @@ public class RemesaController implements Serializable {
     public void setRemesa(Remesa remesa) {
         this.remesa = remesa;
     }
+
+    public void cargarRemesa(Remesa rem) {
+
+        this.remesa = rem;
+        System.out.println(rem.getEmpresa());
+        this.conductor = remesa.getViaje().getViajeAgentes().get(0).getAgente();
+        this.escolta = remesa.getViaje().getViajeAgentes().get(1).getAgente();
+        this.camion = remesa.getViaje().getCamion();
+        this.viaje = remesa.getViaje();
+
+        PrimeFaces.current().executeScript("PF('dlgDetalle').hide()");
+
+    }
+
 }

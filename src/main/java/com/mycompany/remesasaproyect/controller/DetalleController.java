@@ -28,6 +28,7 @@ public class DetalleController implements Serializable {
     @PostConstruct
     public void init() {
         this.remesa = session.getRemesa();
+        System.out.println(remesa.getTipo());
         this.conductor= remesa.getViaje().getViajeAgentes().get(0).getAgente();
         this.escolta= remesa.getViaje().getViajeAgentes().get(1).getAgente();
         this.camion = remesa.getViaje().getCamion();
