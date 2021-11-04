@@ -4,9 +4,12 @@
  */
 package com.mycompany.remesasaproyect.controller;
 
+import com.mycompany.remesasaproyect.model.Agente;
+import com.mycompany.remesasaproyect.model.Camion;
 import com.mycompany.remesasaproyect.model.Empresa;
 import com.mycompany.remesasaproyect.model.Remesa;
 import com.mycompany.remesasaproyect.model.Usuario;
+import com.mycompany.remesasaproyect.model.Viaje;
 import com.mycompany.remesasaproyect.service.ServicioEmpresa;
 import com.mycompany.remesasaproyect.service.ServicioRemesa;
 import java.io.IOException;
@@ -42,6 +45,43 @@ public class RemesaController implements Serializable {
     private List<Remesa> remesasFiltradas;
     private List<Empresa> empresas;
     private Empresa empresa;
+    private Agente conductor;
+    private Agente escolta;
+    private Camion camion;
+    private Viaje viaje;
+
+    public Agente getEscolta() {
+        return escolta;
+    }
+
+    public void setEscolta(Agente escolta) {
+        this.escolta = escolta;
+    }
+
+    public Camion getCamion() {
+        return camion;
+    }
+
+    public void setCamion(Camion camion) {
+        this.camion = camion;
+    }
+
+    public Viaje getViaje() {
+        return viaje;
+    }
+
+    public void setViaje(Viaje viaje) {
+        this.viaje = viaje;
+    }
+    
+    
+    public Agente getConductor() {
+        return conductor;
+    }
+
+    public void setConductor(Agente conductor) {
+        this.conductor = conductor;
+    }
 
     public Empresa getEmpresa() {
         return empresa;
@@ -60,7 +100,13 @@ public class RemesaController implements Serializable {
         this.empresa = new Empresa();
     }
 
-   
+   public void cargarRemesa(Remesa rem){
+       this.remesa = rem;
+       this.conductor= remesa.getViaje().getViajeAgentes().get(0).getAgente();
+       this.escolta= remesa.getViaje().getViajeAgentes().get(1).getAgente();
+       this.camion=remesa.getViaje().getCamion();
+       this.viaje = remesa.getViaje();
+   }
 
     public void creaRemesa() throws IOException {
        

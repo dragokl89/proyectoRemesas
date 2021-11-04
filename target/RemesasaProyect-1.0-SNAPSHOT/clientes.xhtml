@@ -68,6 +68,16 @@
                                     <p:column headerText="Estado" >
                                         <p:outputLabel value="#{remesa.estado}"></p:outputLabel>
                                     </p:column>
+
+                                    <p:column headerText="Actualizar">
+                                        <p:commandButton icon="pi pi-pencil"
+                                                         style="background-color: green" immediate="true"
+                                                         action="#{remesaController.cargarRemesa(remesa)}"
+                                                         oncomplete="PF('dlgDetalles').show()"
+                                                         update="formAddUpdateDetalle:pblDetalles"></p:commandButton>
+                                    </p:column>
+
+
                                 </p:dataTable>
 
                             </div>
@@ -79,6 +89,11 @@
                 </div>
 
             </h:form>
+
+
+
+
+
 
             <p:dialog id="dlgRemesa" header="Enviar o recibir nueva remesa"
                       widgetVar="dlgRemesas" modal="true" responsive="true"
@@ -130,6 +145,74 @@
                 </h:form>
             </p:dialog>
 
+
+
+
+
+
+
+
+            <p:dialog id="dlgDetalle" header="Enviar o recibir nueva remesa"
+                      widgetVar="dlgDetalles" modal="true" responsive="true"
+                      resizable="false" width="50%" height="500">
+
+                <h:form id="formAddUpdateDetalle">
+
+
+                    <p:panelGrid id="pblDetalles" columns="1" layout="grid"
+                                 styleClass="ui-panelgrid-blank" columnClasses="ui-g-12">
+
+                        <p:outputLabel id="cedulaC" value="Identificación del Conductor: " for="cedC"></p:outputLabel>
+                        <h:outputText id="cedC" value="#{remesaController.conductor.cedula}"></h:outputText>
+
+                        <p:outputLabel id="nombreC" value="Nombre del Conductor: " for="nomC"></p:outputLabel>
+                        <h:outputText id="nomC" value="#{remesaController.conductor.nombre} + #{remesaController.conductor.apellido}"></h:outputText>
+
+                        <p:outputLabel id="fotoC" value="Fotografía Conductor: " for="imgC"></p:outputLabel>
+                        <p:graphicImage id="imgC" url="/dameImagenAngete?id=#{remesaController.conductor.idagente}" 
+                                        width="100%"></p:graphicImage>
+
+                        <p:outputLabel id="cedulaE" value="Identificación del Escolta: " for="cedE"></p:outputLabel>
+                        <h:outputText id="cedE" value="#{remesaController.escolta.cedula}"></h:outputText>
+
+                        <p:outputLabel id="nombreE" value="Nombre del Escolta: " for="nomE"></p:outputLabel>
+                        <h:outputText id="nomE" value="#{remesaController.escolta.nombre} + #{remesaController.escolta.apellido}"></h:outputText>
+
+                        <p:outputLabel id="fotoE" value="Fotografía Escolta: " for="imgE"></p:outputLabel>
+                        <p:graphicImage id="imgE" url="/dameImagenAngete?id=#{remesaController.escolta.idagente}" 
+                                        width="100%"></p:graphicImage>
+
+                        <p:outputLabel id="placa" value="Placa Camión: " for="placCam"></p:outputLabel>
+                        <h:outputText id="placCam" value="#{remesaController.camion.placa}"></h:outputText>
+
+                        <p:outputLabel id="marca" value="Marca Camión: " for="marcCam"></p:outputLabel>
+                        <h:outputText id="marcCam" value="#{remesaController.camion.marca}"></h:outputText>
+
+                        <p:outputLabel id="modelo" value="Modelo Camión: " for="modCam"></p:outputLabel>
+                        <h:outputText id="modCam" value="#{remesaController.camion.modelo}"></h:outputText>
+
+                        <p:outputLabel id="color" value="Color Camión: " for="colorCam"></p:outputLabel>
+                        <h:outputText id="colorCam" value="#{remesaController.camion.color}"></h:outputText>
+
+                        <p:outputLabel id="tipoRemesa" value="Tipo de Remesa: " for="tipR"></p:outputLabel>
+                        <h:outputText id="tipR" value="#{remesaController.remesa.tipo}"></h:outputText>
+
+                        <p:outputLabel id="valorRemesa" value="Valor: " for="valR"></p:outputLabel>
+                        <h:outputText id="valR" value="#{remesaController.remesa.valor}"></h:outputText>
+
+                        <p:outputLabel id="fechaViaje" value="Fecha de viaje: " for="fecV"></p:outputLabel>
+                        <h:outputText id="fecV" value="#{remesaController.viaje.fecha}"></h:outputText>
+
+                    </p:panelGrid>
+                    <p:panelGrid columns="2" layout="grid"
+                                 styleClass="ui-panelgrid-blank" columnClasses="ui-g-6, ui-g-6">
+
+                        <p:commandButton immediate="true" type="button" value="Cancelar"
+                                         style="background-color: red" onclick="PF('dlgDetalles').hide()"></p:commandButton>
+                    </p:panelGrid>
+
+                </h:form>
+            </p:dialog>
         </div>
     </h:body>
 
