@@ -56,6 +56,7 @@ public class ServicioRemesaImpl implements ServicioRemesa {
     @Override
     public List<Remesa> listar(Usuario usr) {
         int gender;
+        EntityManager em = emf.createEntityManager();
         gender = usr.getIdUsuario();
         return em.createQuery("select E from Remesa E WHERE E.usuario = :usr",Remesa.class).setParameter("usr", usr).getResultList();
     }

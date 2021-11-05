@@ -173,6 +173,13 @@ public class AgenteController implements Serializable {
         this.session = session;
     }
 
+    public void eliminarAgente (Agente ag){
+        
+        ag.setEstado(false);
+        this.agente=ag;
+        servicio.crear(this.agente);
+        this.agentes = servicio.listar();
+    }
     /**
      * Metodo que sirve para saber si los dos campos de password coinciden
      *

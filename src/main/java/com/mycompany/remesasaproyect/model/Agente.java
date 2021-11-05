@@ -16,7 +16,7 @@ import javax.persistence.NamedQuery;
  * @author c-ado
  */
 @Entity
-@NamedQuery(name = "Agente.findAll", query = "select E from Agente E")
+@NamedQuery(name = "Agente.findAll", query = "select E from Agente E where E.estado = true")
 public class Agente {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

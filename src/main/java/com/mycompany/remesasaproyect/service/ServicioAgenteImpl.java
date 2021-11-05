@@ -79,6 +79,7 @@ public class ServicioAgenteImpl implements ServicioAgente {
 
     @Override
     public Agente buscarAgente(int i) {
+        EntityManager em = emf.createEntityManager();
         return em.find(Agente.class, i);
     }
     

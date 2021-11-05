@@ -8,6 +8,7 @@ import com.mycompany.remesasaproyect.model.Remesa;
 import com.mycompany.remesasaproyect.model.Usuario;
 import com.mycompany.remesasaproyect.service.ServicioRemesa;
 import com.mycompany.remesasaproyect.service.ServicioUsuario;
+import com.mycompany.remesasaproyect.service.ServicioUsuarioImpl;
 import java.io.IOException;
 import java.io.Serializable;
 import java.util.ArrayList;
@@ -242,5 +243,14 @@ public class UsuarioController implements Serializable {
 
     public void setSession(SessionController session) {
         this.session = session;
+    }
+    
+    public void eliminarUsuario(Usuario us){
+        
+        us.setEstado(false);
+        this.usuario=us;
+        servicio.crear(this.usuario);
+        this.usuarios = servicio.listar();
+        
     }
 }

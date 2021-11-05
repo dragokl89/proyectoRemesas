@@ -16,7 +16,7 @@ import javax.persistence.NamedQuery;
  * @author c-ado
  */
 @Entity
-@NamedQuery(name = "Usuario.findAll", query = "select E from Usuario E")
+@NamedQuery(name = "Usuario.findAll", query = "select E from Usuario E where E.estado = true")
 public class Usuario {
 
     @Id

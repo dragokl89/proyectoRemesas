@@ -33,7 +33,7 @@
 
                                 <div class="p-col-2">
                                     <p:commandButton class="botontbl"
-                                        oncomplete="PF('dlgAlbums').show()"
+                                                     oncomplete="PF('dlgAlbums').show()"
                                                      icon="pi pi-user-plus"
                                                      value="Agregar usuario"
                                                      action="#{usuarioController.limpiarComponentes}"
@@ -48,7 +48,9 @@
                                              filteredValue="#{usuarioController.usuariosFiltrados}"
                                              rowsPerPageTemplate="20,50,100" var="usuario"
                                              value="#{usuarioController.usuarios}"
-                                             paginatorPosition="bottom">
+                                             paginatorPosition="bottom"
+
+                                             >
 
 
                                     <f:facet name="header">
@@ -57,23 +59,34 @@
 
 
                                     <p:column headerText="Nombre" filterBy="#{usuario.nombre}" filterMatchMode="contains">
-                                        <p:outputLabel value="#{usuario.nombre}"></p:outputLabel>
+                                        <p:outputLabel value="#{usuario.nombre}" ></p:outputLabel>
                                     </p:column>
 
                                     <p:column headerText="Contraseña" >
-                                        <p:outputLabel value="#{usuario.contrasena}"></p:outputLabel>
-                                    </p:column>
-                                    
-                                    <p:column headerText="Habilitado" >
-                                        <p:outputLabel value="#{usuario.estado}"></p:outputLabel>
+                                        <p:outputLabel value="#{usuario.contrasena}" ></p:outputLabel>
                                     </p:column>
 
-                                    <p:column headerText="Actualizar">
-                                        <p:commandButton icon="pi pi-pencil"
-                                                         style="background-color: green; border:1px solid green" immediate="true"
-                                                         action="#{usuarioController.cargarUsuario(usuario)}"
-                                                         oncomplete="PF('dlgAlbums').show()"
-                                                         update="formAddUpdateAlbum:pblAlbums"></p:commandButton>
+                                    <p:column headerText="Habilitado" >
+                                        <p:outputLabel value="#{usuario.estado}" ></p:outputLabel>
+                                    </p:column>
+
+                                    <p:column headerText="Actualizar" >
+                                        <p:commandButton 
+                                            
+                                            icon="pi pi-pencil"
+                                            style="background-color: green; border:1px solid green" immediate="true"
+                                            action="#{usuarioController.cargarUsuario(usuario)}"
+                                            oncomplete="PF('dlgAlbums').show()"
+                                            update="formAddUpdateAlbum:pblAlbums"></p:commandButton>
+                                    </p:column>
+
+                                    <p:column headerText="Eliminar" >
+                                        <p:commandButton 
+                                            
+                                            icon="pi pi-times"
+                                            style="background-color:#b50000; border:1px solid #b50000" immediate="true"
+                                            action="#{usuarioController.eliminarUsuario(usuario)}"
+                                            update="formAlbums:messages, formAddUpdateAlbum:pblAlbums, formAlbums:tblAlbums"></p:commandButton>
                                     </p:column>
                                 </p:dataTable>
 
@@ -106,11 +119,8 @@
                         <p:inputText id="txtPassword" required="true"
                                      requiredMessage="El contrasena es requerida"
                                      value="#{usuarioController.usuario.contrasena}"></p:inputText>
-                        
 
-                        <p:outputLabel id="lblHabilitar" value="Habilitar" for="txtHabilitar"></p:outputLabel>
-                        <p:toggleSwitch id="txtHabilitar" required="false"
-                                        value="#{usuarioController.usuario.estado}"></p:toggleSwitch>
+
                     </p:panelGrid>
                     <p:panelGrid columns="2" layout="grid"
                                  styleClass="ui-panelgrid-blank" columnClasses="ui-g-6, ui-g-6">
